@@ -1,0 +1,12 @@
+{
+  "Import styles template": {
+    "prefix": "ims",
+    "body": ["import s from './'"],
+    "description": "Импорт стилей",
+  },
+  "Import react template": {
+    "prefix": "imr",
+    "body": ["import React from 'react'"],
+    "description": "Импорт реакт",
+  },
+}
