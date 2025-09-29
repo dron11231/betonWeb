@@ -1,12 +1,12 @@
 import React from 'react';
-
-import { AuthPage } from 'src/pages/AuthPage/AuthPage';
+import { ErrorBoundary } from 'components';
+import { MainRouter } from 'routes/MainRouter';
 
 const App: React.FC = () => {
   return (
-    <div className="App">
-      <AuthPage />
-    </div>
+    <ErrorBoundary>
+      <MainRouter />
+    </ErrorBoundary>
   );
 };
 

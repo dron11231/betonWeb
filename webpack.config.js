@@ -1,6 +1,10 @@
 import path from 'path';
 
+import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import webpack from 'webpack';
+
+const isMSWActive = process.env.MSW_ACTIVE === 'true';
 
 export default {
   entry: './src/index.tsx',
@@ -11,6 +15,7 @@ export default {
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
+    modules: ['src', 'node_modules'],
     alias: {
       src: path.resolve(process.cwd(), 'src'),
     },
@@ -52,6 +57,18 @@ export default {
   plugins: [
     new HtmlWebpackPlugin({
       template: './public/index.html',
+    }),
+    new ForkTsCheckerWebpackPlugin({
+      typescript: {
+        diagnosticOptions: {
+          syntactic: true,
+          semantic: true,
+        },
+      },
+    }),
+    new webpack.DefinePlugin({
+      process: { env: {} },
+      MSW_ACTIVE: JSON.stringify(isMSWActive),
     }),
   ],
   devServer: {
