@@ -1,6 +1,10 @@
+import { SignUpScreen } from './components';
 import s from './authPage.scss';
 
 export const AuthPage = () => {
-  throw new Error('hz');
-  return <div className={s.test}>Auth</div>;
+  return (
+    <div className={s.container}>
+      <SignUpScreen />
+    </div>
+  );
 };

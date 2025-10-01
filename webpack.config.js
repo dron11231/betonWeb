@@ -1,5 +1,6 @@
 import path from 'path';
 
+import CircularDependencyPlugin from 'circular-dependency-plugin';
 import ForkTsCheckerWebpackPlugin from 'fork-ts-checker-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import webpack from 'webpack';
@@ -69,6 +70,12 @@ export default {
     new webpack.DefinePlugin({
       process: { env: {} },
       MSW_ACTIVE: JSON.stringify(isMSWActive),
+    }),
+    new CircularDependencyPlugin({
+      exclude: /node_modules/,
+      include: /src/,
+      failOnError: true,
+      cwd: process.cwd(),
     }),
   ],
   devServer: {

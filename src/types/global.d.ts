@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-empty-object-type */
 /* eslint-disable @typescript-eslint/naming-convention */
 declare const MSW_ACTIVE: string;
 
@@ -13,4 +12,4 @@ type ExtendedFC = {
   children?: React.ReactNode;
 };
 
-declare type IFC<D = {}> = React.FC<ExtendedFc & D>;
+declare type IFC<D = Record<string, unknown>> = React.FC<ExtendedFC & D>;
