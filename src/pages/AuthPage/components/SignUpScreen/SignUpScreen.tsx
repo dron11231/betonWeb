@@ -34,8 +34,7 @@ export const SignUpScreen: IFC = () => {
         name="passwordField"
         size="large"
         value={password}
-        // label="Пароль"
-        placeholder="Введите ваш пароль"
+        placeholder="Пароль"
         type="password"
         onChange={handleChangePassword}
       />
