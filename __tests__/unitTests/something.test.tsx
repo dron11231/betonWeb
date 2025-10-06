@@ -5,5 +5,5 @@ import { AuthPage } from 'pages/AuthPage';
 test('test', () => {
   render(<AuthPage />);
 
-  expect(screen.getByText('Придумайте логин')).toBeInTheDocument();
+  expect(screen.getByText('Логин')).toBeInTheDocument();
 });

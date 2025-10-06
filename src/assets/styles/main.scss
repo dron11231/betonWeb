@@ -1,1 +1,28 @@
-@forward './colors.scss';
+body {
+  font-family: var(--font-base);
+  margin: 0;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  color: #000;
+}
+
+h2 {
+  margin: 0;
+  text-align: center;
+  font-weight: 400;
+  line-height: 24px;
+}
+
+a,
+button {
+  &:active,
+  &:focus {
+    outline: none;
+  }
+  &:focus-visible {
+    outline: 2px solid #1e88e6;
+  }
+}

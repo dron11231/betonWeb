@@ -1,25 +1,44 @@
 import { useState } from 'react';
+import MailIcon from 'assets/icons/mailIcon.svg?svgr';
 import { TextField } from 'components';
+import s from './signUpScreen.scss';
 
 export const SignUpScreen: IFC = () => {
-  const [login, setLogin] = useState('');
-  // const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-  const handleChangeLogin = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
 
-    setLogin(value);
+    setEmail(value);
   };
 
-  // const handleChangePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   const { value } = event.target;
+  const handleChangePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target;
 
-  //   setPassword(value);
-  // };
+    setPassword(value);
+  };
 
   return (
-    <div>
-      <TextField value={login} label="Логин" onChange={handleChangeLogin} />
+    <div className={s.container}>
+      <h2>Зарегистрируйтесь</h2>
+      <TextField
+        name="loginField"
+        value={email}
+        size="large"
+        placeholder="Email"
+        icon={<MailIcon />}
+        onChange={handleChangeEmail}
+      />
+      <TextField
+        name="passwordField"
+        size="large"
+        value={password}
+        // label="Пароль"
+        placeholder="Введите ваш пароль"
+        type="password"
+        onChange={handleChangePassword}
+      />
     </div>
   );
 };

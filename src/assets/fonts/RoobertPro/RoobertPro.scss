@@ -1,0 +1,63 @@
+@font-face {
+  font-family: 'Roobert PRO';
+  src: url('../fonts/RoobertPro/RoobertPRO-Regular.eot');
+  src:
+    local('Roobert PRO Regular'),
+    local('RoobertPRO-Regular'),
+    url('../fonts/RoobertPro/RoobertPRO-Regular.eot?#iefix')
+      format('embedded-opentype'),
+    url('../fonts/RoobertPro/RoobertPRO-Regular.woff2') format('woff2'),
+    url('../fonts/RoobertPro/RoobertPRO-Regular.woff') format('woff'),
+    url('../fonts/RoobertPro/RoobertPRO-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Roobert PRO';
+  src: url('../fonts/RoobertPro/RoobertPRO-Bold.eot');
+  src:
+    local('Roobert PRO Bold'),
+    local('RoobertPRO-Bold'),
+    url('../fonts/RoobertPro/RoobertPRO-Bold.eot?#iefix')
+      format('embedded-opentype'),
+    url('../fonts/RoobertPro/RoobertPRO-Bold.woff2') format('woff2'),
+    url('../fonts/RoobertPro/RoobertPRO-Bold.woff') format('woff'),
+    url('../fonts/RoobertPro/RoobertPRO-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Roobert PRO';
+  src: url('../fonts/RoobertPro/RoobertPRO-Light.eot');
+  src:
+    local('Roobert PRO Light'),
+    local('RoobertPRO-Light'),
+    url('../fonts/RoobertPro/RoobertPRO-Light.eot?#iefix')
+      format('embedded-opentype'),
+    url('../fonts/RoobertPro/RoobertPRO-Light.woff2') format('woff2'),
+    url('../fonts/RoobertPro/RoobertPRO-Light.woff') format('woff'),
+    url('../fonts/RoobertPro/RoobertPRO-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Roobert PRO';
+  src: url('../fonts/RoobertPro/RoobertPRO-Medium.eot');
+  src:
+    local('Roobert PRO Medium'),
+    local('RoobertPRO-Medium'),
+    url('../fonts/RoobertPro/RoobertPRO-Medium.eot?#iefix')
+      format('embedded-opentype'),
+    url('../fonts/RoobertPro/RoobertPRO-Medium.woff2') format('woff2'),
+    url('../fonts/RoobertPro/RoobertPRO-Medium.woff') format('woff'),
+    url('../fonts/RoobertPro/RoobertPRO-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}

@@ -1,6 +1,7 @@
 import { createRoot } from 'react-dom/client';
 import App from './App';
-import 'assets/styles/main.scss';
+import 'assets/styles/index.scss';
+import 'assets/fonts/index.scss';
 
 async function enableMocking() {
   if (MSW_ACTIVE) {

@@ -29,6 +29,44 @@ export default {
         exclude: /node_modules/,
       },
       {
+        test: /\.(eot|ttf|woff|woff(2)?)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: 'assets/fonts/[name].[ext]?[hash]',
+            },
+          },
+        ],
+      },
+      {
+        test: /\.(svg)$/i,
+        resourceQuery: { not: [/svgr/] },
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: 'svg/[name].[contenthash:7].[ext]',
+            },
+          },
+        ],
+      },
+      {
+        test: /\.svg$/i,
+        issuer: /\.tsx?$/,
+        resourceQuery: /svgr/,
+        use: [
+          {
+            loader: '@svgr/webpack',
+            options: {
+              typescript: true,
+              SVGO: true,
+              ref: true,
+            },
+          },
+        ],
+      },
+      {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader', 'postcss-loader'],
       },
@@ -42,6 +80,7 @@ export default {
               importLoaders: 2,
               sourceMap: true,
               esModule: false,
+              url: true,
               modules: {
                 mode: 'local',
                 localIdentName: `[path][name]--[local]`,
