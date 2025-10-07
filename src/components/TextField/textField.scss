@@ -25,6 +25,7 @@
 
     .input {
       min-height: 40px;
+      font-size: var(--font-size-medium);
     }
   }
 }
@@ -46,9 +47,8 @@
   border: 2px solid var(--border-secondary);
   border-radius: 6px;
   box-sizing: border-box;
-  font-size: 12px;
   width: 100%;
-  padding: 20px 12px 12px 40px;
+  padding: 20px 0px 12px 40px;
 
   &:not(:focus) {
     background-color: var(--border-secondary);
@@ -60,11 +60,11 @@
   }
 }
 
-.placeholder {
+.innerLabel {
   position: absolute;
   top: 5px;
   left: 40px;
-  font-size: 8px;
+  font-size: 10px;
   color: var(--text-basic);
   pointer-events: none;
 }
@@ -72,9 +72,8 @@
 .icon {
   display: flex;
   position: absolute;
-  top: 50%;
+  top: 24px;
   left: 12px;
-  transform: translateY(-50%);
   max-height: 20px;
   max-height: 20px;
   pointer-events: none;

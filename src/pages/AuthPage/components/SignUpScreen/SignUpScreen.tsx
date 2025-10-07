@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import KeyIcon from 'assets/icons/keyIcon.svg?svgr';
 import MailIcon from 'assets/icons/mailIcon.svg?svgr';
 import { TextField } from 'components';
 import s from './signUpScreen.scss';
@@ -26,7 +27,8 @@ export const SignUpScreen: IFC = () => {
         name="loginField"
         value={email}
         size="large"
-        placeholder="Email"
+        labelInner="Email"
+        placeholder="Введите ваш email"
         icon={<MailIcon />}
         onChange={handleChangeEmail}
       />
@@ -34,8 +36,10 @@ export const SignUpScreen: IFC = () => {
         name="passwordField"
         size="large"
         value={password}
-        placeholder="Пароль"
+        labelInner="Пароль"
+        placeholder="Введите ваш пароль"
         type="password"
+        icon={<KeyIcon />}
         onChange={handleChangePassword}
       />
     </div>
