@@ -1,6 +1,9 @@
 .button {
   font-family: var(--font-base);
   border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   &.small {
     font-size: var(--font-size-small);
@@ -14,7 +17,7 @@
 
   &.large {
     max-height: 40px;
-    font-size: var(--font-size-large);
+    font-size: var(--font-size-medium);
     line-height: 18px;
     padding: 11px 20px;
 

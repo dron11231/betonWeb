@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import KeyIcon from 'assets/icons/keyIcon.svg?svgr';
 import MailIcon from 'assets/icons/mailIcon.svg?svgr';
-import { TextField } from 'components';
+import { Button, TextField } from 'components';
 import s from './signUpScreen.scss';
 
 export const SignUpScreen: IFC = () => {
@@ -20,11 +20,15 @@ export const SignUpScreen: IFC = () => {
     setPassword(value);
   };
 
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+  };
+
   return (
-    <div className={s.container}>
+    <form onSubmit={handleSubmit} className={s.container}>
       <h2>Зарегистрируйтесь</h2>
       <TextField
-        name="loginField"
+        name="emailField"
         value={email}
         size="large"
         labelInner="Email"
@@ -42,6 +46,9 @@ export const SignUpScreen: IFC = () => {
         icon={<KeyIcon />}
         onChange={handleChangePassword}
       />
-    </div>
+      <Button className={s.submitButton} size="large" type="submit">
+        Зарегистрироваться
+      </Button>
+    </form>
   );
 };
