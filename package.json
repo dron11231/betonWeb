@@ -19,6 +19,8 @@
     "not ie <= 11"
   ],
   "dependencies": {
+    "@swc/core": "1.13.5",
+    "@swc/jest": "0.2.39",
     "autoprefixer": "10.4.21",
     "axios": "1.12.2",
     "circular-dependency-plugin": "5.2.2",

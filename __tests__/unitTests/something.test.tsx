@@ -5,5 +5,5 @@ import { AuthPage } from 'pages/AuthPage';
 test('test', () => {
   render(<AuthPage />);
 
-  expect(screen.getByText('Логин')).toBeInTheDocument();
+  expect(screen.getByText('Email')).toBeInTheDocument();
 });
