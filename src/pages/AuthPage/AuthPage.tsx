@@ -6,7 +6,13 @@ import { AuthForm } from './components';
 import { EAuthProccessTypes } from './types';
 import s from './authPage.scss';
 
-export const AuthPage = () => {
+interface IAuthPageProps {
+  authProccessType: EAuthProccessTypes;
+}
+
+export const AuthPage: IFC<IAuthPageProps> = (props) => {
+  const { authProccessType } = props;
+
   const handleSubmit = (formData: IAuthData) => {
     // В зависимости от path отправляем или рест на регистрацию или на авторизацию
     authStore.fetchSignUpData(formData);
@@ -15,7 +21,7 @@ export const AuthPage = () => {
   console.log(userStore.userData);
 
   return (
-    <div className={s.container}>
+    <div className={s.container} data-testid="auth-page">
       <div className={s.formContainer}>
         <div className={s.alternateAuthButtons}>
           <Button className={s.authButton} size="large" icon={<GoogleIcon />}>
@@ -23,10 +29,7 @@ export const AuthPage = () => {
           </Button>
         </div>
         <div className={s.separator}>или</div>
-        <AuthForm
-          authProccessType={EAuthProccessTypes.SignUp}
-          onSubmit={handleSubmit}
-        />
+        <AuthForm authProccessType={authProccessType} onSubmit={handleSubmit} />
       </div>
     </div>
   );

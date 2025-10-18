@@ -22,11 +22,12 @@ export const TextField: IFC<ITextFieldProps> = (props) => {
     labelInner,
     type,
     placeholder,
+    className,
     onChange,
   } = props;
 
   return (
-    <div className={classNames(s.container, s[size])}>
+    <div className={classNames(className, s.container, s[size])}>
       <label
         htmlFor={name}
         className={classNames(s.label, { [s.hidden]: !label })}

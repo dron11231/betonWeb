@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import KeyIcon from 'assets/icons/keyIcon.svg?svgr';
 import MailIcon from 'assets/icons/mailIcon.svg?svgr';
 import { Button, TextField } from 'components';
@@ -11,6 +12,19 @@ interface IAuthFormProps {
   authProccessType: EAuthProccessTypes;
   onSubmit: (formData: IAuthData) => void;
 }
+
+const redirectLinksMap = {
+  [EAuthProccessTypes.SignIn]: (
+    <span className={s.offerToRegister}>
+      Нет аккаунта? <Link to="/signUp">Зарегистрируйтесь!</Link>
+    </span>
+  ),
+  [EAuthProccessTypes.SignUp]: (
+    <span className={s.offerToRegister}>
+      Уже есть аккаунт? <Link to="/signIn">Авторизируйтесь!</Link>
+    </span>
+  ),
+};
 
 export const AuthForm: IFC<IAuthFormProps> = (props) => {
   const { authProccessType, onSubmit } = props;
@@ -45,6 +59,7 @@ export const AuthForm: IFC<IAuthFormProps> = (props) => {
     <form onSubmit={handleSubmit} className={s.container}>
       <h2>{formTitle}</h2>
       <TextField
+        className={s.textField}
         name="emailField"
         value={email}
         size="large"
@@ -54,6 +69,7 @@ export const AuthForm: IFC<IAuthFormProps> = (props) => {
         onChange={handleChangeEmail}
       />
       <TextField
+        className={s.textField}
         name="passwordField"
         size="large"
         value={password}
@@ -66,6 +82,7 @@ export const AuthForm: IFC<IAuthFormProps> = (props) => {
       <Button className={s.submitButton} size="large" type="submit">
         {submitButtonText}
       </Button>
+      {redirectLinksMap[authProccessType]}
     </form>
   );
 };

@@ -6,7 +6,8 @@
     "test": "jest",
     "local": "webpack serve --mode development",
     "local+msw": "cross-env MSW_ACTIVE=true npm run local",
-    "build": "webpack --mode production"
+    "build": "webpack --mode production",
+    "dev": "rsbuild dev"
   },
   "author": "",
   "type": "module",
@@ -39,6 +40,9 @@
     "@babel/preset-react": "7.27.1",
     "@babel/preset-typescript": "7.27.1",
     "@eslint/js": "9.36.0",
+    "@rsbuild/core": "1.5.17",
+    "@rsbuild/plugin-react": "1.4.1",
+    "@rsbuild/plugin-sass": "1.4.0",
     "@svgr/webpack": "8.1.0",
     "@testing-library/jest-dom": "6.8.0",
     "@testing-library/react": "16.3.0",
