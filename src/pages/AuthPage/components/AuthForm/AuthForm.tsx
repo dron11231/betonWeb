@@ -51,7 +51,6 @@ export const AuthForm: IFC<IAuthFormProps> = (props) => {
     onSubmit({
       email,
       password,
-      phone: 123, //Временно
     });
   };
 

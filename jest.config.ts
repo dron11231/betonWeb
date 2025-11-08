@@ -24,6 +24,9 @@ export default {
     'node_modules/variables/.+\\.(j|t)sx?$': 'ts-jest',
     '^.+\\.tsx?$': '@swc/jest',
   },
+  globals: {
+    IS_LOCAL: process.env.IS_LOCAL === 'true' || false,
+  },
   moduleDirectories: ['node_modules', '<rootDir>/src'],
   unmockedModulePathPatterns: ['node_modules/react/'],
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json'],

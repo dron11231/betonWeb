@@ -21,4 +21,6 @@ declare type IFC<D = Record<string, unknown>> = React.FC<ExtendedFC & D>;
 
 declare type TSizeType = 'small' | 'medium' | 'large';
 
-declare const MSW_ACTIVE: string;
+declare const MSW_ACTIVE: string | undefined;
+
+declare const IS_LOCAL: string | undefined;

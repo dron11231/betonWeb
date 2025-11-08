@@ -4,7 +4,7 @@ import 'assets/styles/index.scss';
 import 'assets/fonts/index.scss';
 
 async function enableMocking() {
-  if (MSW_ACTIVE) {
+  if (MSW_ACTIVE === 'true') {
     const { worker } = await import('../__mocks__/browserServer');
 
     return worker.start({ onUnhandledRequest: 'warn' });

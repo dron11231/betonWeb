@@ -4,13 +4,24 @@ import { fileURLToPath } from 'url';
 import { defineConfig } from '@rsbuild/core';
 import { pluginReact } from '@rsbuild/plugin-react';
 import { pluginSass } from '@rsbuild/plugin-sass';
+import { pluginSvgr } from '@rsbuild/plugin-svgr';
 
 const __filename = fileURLToPath(import.meta.url);
 
 const __dirname = path.dirname(__filename);
 
 export default defineConfig({
-  plugins: [pluginReact(), pluginSass()],
+  plugins: [
+    pluginReact(),
+    pluginSass(),
+    pluginSvgr({
+      svgrOptions: {
+        exportType: 'default',
+        svgo: true,
+      },
+      exclude: [/\*.svg?inline/],
+    }),
+  ],
   output: {
     distPath: {
       root: path.join(__dirname, 'dist'),
@@ -37,6 +48,10 @@ export default defineConfig({
     preEntry: 'core-js/stable',
     entry: {
       index: './src/index.tsx',
+    },
+    define: {
+      MSW_ACTIVE: JSON.stringify(process.env.MSW_ACTIVE || 'false'),
+      IS_LOCAL: JSON.stringify(process.env.IS_LOCAL) || 'false',
     },
   },
   tools: {
