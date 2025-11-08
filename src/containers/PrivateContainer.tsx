@@ -6,7 +6,7 @@ export const PrivateContainer: IFC = (props) => {
   const loggedIn = false;
 
   if (!loggedIn) {
-    return <Navigate to="/auth" />;
+    return <Navigate to="/signIn" />;
   }
 
   return <div>{children}</div>;

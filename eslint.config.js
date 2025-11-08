@@ -36,7 +36,7 @@ export default defineConfig([
       },
     },
     rules: {
-      'import/no-unresolved': 'error',
+      'import/no-unresolved': ['error', { ignore: ['\\.svg\\?svgr$'] }],
       '@typescript-eslint/naming-convention': [
         'error',
         {

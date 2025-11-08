@@ -1,0 +1,40 @@
+.button {
+  font-family: var(--font-base);
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &.small {
+    font-size: var(--font-size-small);
+    padding: 2px 8px;
+  }
+
+  &.medium {
+    font-size: var(--font-size-medium);
+    padding: 6px 12px;
+  }
+
+  &.large {
+    max-height: 40px;
+    font-size: var(--font-size-medium);
+    line-height: 18px;
+    padding: 11px 20px;
+
+    .buttonText {
+      display: block;
+      padding-bottom: 2px; // Чтобы текст визуально был по центру относительно иконки
+    }
+  }
+}
+
+.buttonContent {
+  display: flex;
+  gap: 10px; // TODO: Оставить при любых размерах кнопки или должен быть разный?
+  align-items: center;
+}
+
+.iconWrapper {
+  display: flex;
+  align-items: center;
+}

@@ -1,7 +1,33 @@
+@mixin size-variant($size) {
+  font-size: var(--font-size-#{$size});
+
+  .label {
+    font-size: var(--font-size-#{$size});
+  }
+}
+
 .container {
   display: flex;
   flex-direction: column;
   gap: 4px;
+
+  &.small {
+    @include size-variant(small);
+  }
+
+  &.medium {
+    @include size-variant(medium);
+    min-height: 30px;
+  }
+
+  &.large {
+    @include size-variant(large);
+
+    .input {
+      min-height: 40px;
+      font-size: var(--font-size-medium);
+    }
+  }
 }
 
 .label {
@@ -12,8 +38,43 @@
   }
 }
 
+.inputWrapper {
+  position: relative;
+  width: 100%;
+}
+
 .input {
-  border: 2px solid black;
-  border-radius: 4px;
-  min-height: 30px;
+  border: 2px solid var(--border-secondary);
+  border-radius: 6px;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 20px 12px 12px 40px;
+
+  &:not(:focus) {
+    background-color: var(--border-secondary);
+  }
+
+  &:focus-visible {
+    outline: none;
+    border-color: var(--focus-color);
+  }
+}
+
+.innerLabel {
+  position: absolute;
+  top: 5px;
+  left: 40px;
+  font-size: 10px;
+  color: var(--text-basic);
+  pointer-events: none;
+}
+
+.icon {
+  display: flex;
+  position: absolute;
+  top: 24px;
+  left: 12px;
+  max-height: 20px;
+  max-height: 20px;
+  pointer-events: none;
 }
