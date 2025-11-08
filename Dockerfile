@@ -17,3 +17,4 @@ EXPOSE 3000
 
 # Команда запуска
 CMD ["npm", "run", "local"]
+
