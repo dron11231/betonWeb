@@ -1,11 +1,11 @@
-import { EAuthProccessTypes } from 'pages/AuthPage/types';
+import { EAuthProcessTypes } from 'pages/AuthPage/types';
 
 export const formTitlesMap = {
-  [EAuthProccessTypes.SignUp]: 'Зарегистрируйтесь',
-  [EAuthProccessTypes.SignIn]: 'Авторизируйтесь',
+  [EAuthProcessTypes.SignUp]: 'Зарегистрируйтесь',
+  [EAuthProcessTypes.SignIn]: 'Авторизируйтесь',
 };
 
 export const submitButtonTextsMap = {
-  [EAuthProccessTypes.SignUp]: 'Зарегистрироваться',
-  [EAuthProccessTypes.SignIn]: 'Войти',
+  [EAuthProcessTypes.SignUp]: 'Зарегистрироваться',
+  [EAuthProcessTypes.SignIn]: 'Войти',
 };

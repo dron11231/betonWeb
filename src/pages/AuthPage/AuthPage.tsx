@@ -1,24 +1,31 @@
+import { toJS } from 'mobx';
+import { Navigate } from 'react-router-dom';
 import GoogleIcon from 'assets/icons/googleIcon.svg?svgr';
 import { Button } from 'components';
+import { routerPaths } from 'routes/routerPaths';
 import { authStore, userStore } from 'stores';
 import { IAuthData } from 'stores/AuthStore/types';
+import { observer } from 'utils';
 import { AuthForm } from './components';
-import { EAuthProccessTypes } from './types';
+import { EAuthProcessTypes } from './types';
 import s from './authPage.scss';
 
 interface IAuthPageProps {
-  authProccessType: EAuthProccessTypes;
+  authProccessType: EAuthProcessTypes;
 }
 
-export const AuthPage: IFC<IAuthPageProps> = (props) => {
+export const AuthPage: IFC<IAuthPageProps> = observer((props) => {
   const { authProccessType } = props;
 
   const handleSubmit = (formData: IAuthData) => {
-    // В зависимости от path отправляем или рест на регистрацию или на авторизацию
-    authStore.fetchSignUpData(formData);
+    authStore.fetchAuthData(formData, authProccessType);
   };
-  console.log(authStore.isLoggedIn);
-  console.log(userStore.userData);
+  console.log('isLoading', authStore.isLoading);
+  console.log('userStore', toJS(userStore.userData));
+
+  if (authStore.isLoggedIn) {
+    return <Navigate to={routerPaths.Home} />;
+  }
 
   return (
     <div className={s.container} data-testid="auth-page">
@@ -33,4 +40,4 @@ export const AuthPage: IFC<IAuthPageProps> = (props) => {
       </div>
     </div>
   );
-};
+}, 'AuthPage');

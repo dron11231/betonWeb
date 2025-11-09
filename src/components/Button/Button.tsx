@@ -1,5 +1,6 @@
 import React, { JSX } from 'react';
 import classNames from 'classnames';
+import { Loader } from 'components/Loader';
 import s from './button.scss';
 
 interface IButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -10,10 +11,10 @@ interface IButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export const Button: IFC<IButtonProps> = (props) => {
-  const { children, size = 'medium', icon, className } = props;
-
+  const { children, size = 'medium', isLoading, icon, className } = props;
   return (
     <button className={classNames(className, s.button, s[size])}>
+      {isLoading && <Loader />}
       <div className={s.buttonContent}>
         <span className={s.buttonText}>{children}</span>
         {!!icon && <div className={s.iconWrapper}>{icon}</div>}

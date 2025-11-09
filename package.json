@@ -19,6 +19,10 @@
     "not ie <= 11"
   ],
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@mui/icons-material": "7.3.5",
+    "@mui/material": "^7.3.5",
     "@swc/core": "1.13.5",
     "@swc/jest": "0.2.39",
     "axios": "1.12.2",
@@ -65,7 +69,7 @@
     "sass": "1.93.2",
     "ts-jest": "29.4.4",
     "ts-loader": "9.5.4",
-    "ts-node": "^10.9.2",
+    "ts-node": "10.9.2",
     "typescript": "5.9.2",
     "typescript-eslint": "8.44.1",
     "typescript-plugin-css-modules": "5.2.0"

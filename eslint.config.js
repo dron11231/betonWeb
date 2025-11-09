@@ -15,6 +15,7 @@ export default defineConfig([
       js,
       import: pluginImport,
       'css-modules': pluginCssModules,
+      pluginReact,
     },
     extends: ['js/recommended'],
     languageOptions: {
@@ -37,6 +38,8 @@ export default defineConfig([
     },
     rules: {
       'import/no-unresolved': ['error', { ignore: ['\\.svg\\?svgr$'] }],
+      'import/no-duplicates': ['error', { considerQueryString: true }],
+      'no-duplicate-imports': 'error',
       '@typescript-eslint/naming-convention': [
         'error',
         {

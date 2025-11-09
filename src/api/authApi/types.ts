@@ -1,5 +1,4 @@
-export interface ICreateNewUserResponsePayload {
+export interface IAuthResponse {
   id: number;
   email: string;
-  created: Date;
 }

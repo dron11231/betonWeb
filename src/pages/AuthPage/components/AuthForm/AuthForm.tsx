@@ -3,23 +3,24 @@ import { Link } from 'react-router-dom';
 import KeyIcon from 'assets/icons/keyIcon.svg?svgr';
 import MailIcon from 'assets/icons/mailIcon.svg?svgr';
 import { Button, TextField } from 'components';
-import { EAuthProccessTypes } from 'pages/AuthPage/types';
+import { EAuthProcessTypes } from 'pages/AuthPage/types';
+import { authStore } from 'stores';
 import { IAuthData } from 'stores/AuthStore/types';
 import { formTitlesMap, submitButtonTextsMap } from './constants';
 import s from './authForm.scss';
 
 interface IAuthFormProps {
-  authProccessType: EAuthProccessTypes;
+  authProccessType: EAuthProcessTypes;
   onSubmit: (formData: IAuthData) => void;
 }
 
 const redirectLinksMap = {
-  [EAuthProccessTypes.SignIn]: (
+  [EAuthProcessTypes.SignIn]: (
     <span className={s.offerToRegister}>
       Нет аккаунта? <Link to="/signUp">Зарегистрируйтесь!</Link>
     </span>
   ),
-  [EAuthProccessTypes.SignUp]: (
+  [EAuthProcessTypes.SignUp]: (
     <span className={s.offerToRegister}>
       Уже есть аккаунт? <Link to="/signIn">Авторизируйтесь!</Link>
     </span>
@@ -78,10 +79,17 @@ export const AuthForm: IFC<IAuthFormProps> = (props) => {
         icon={<KeyIcon />}
         onChange={handleChangePassword}
       />
-      <Button className={s.submitButton} size="large" type="submit">
+      <Button
+        isLoading={authStore.isLoading}
+        className={s.submitButton}
+        size="large"
+        type="submit"
+      >
         {submitButtonText}
       </Button>
       {redirectLinksMap[authProccessType]}
     </form>
   );
 };
+
+AuthForm.displayName = 'AuthForm';

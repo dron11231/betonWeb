@@ -1,2 +1,1 @@
 export * from './PrivateContainer';
-export * from './MainNavigation';

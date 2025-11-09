@@ -4,6 +4,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 
   &.small {
     font-size: var(--font-size-small);
