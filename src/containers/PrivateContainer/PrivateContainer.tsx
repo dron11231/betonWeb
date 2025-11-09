@@ -1,6 +1,6 @@
 import { Navigate } from 'react-router-dom';
 import { routerPaths } from 'routes/routerPaths';
-import { authStore } from 'stores';
+// import { authStore } from 'stores';
 import { observer } from 'utils';
 
 export const PrivateContainer: IFC = observer((props) => {
