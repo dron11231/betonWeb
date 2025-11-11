@@ -15,7 +15,7 @@ export interface IResearchApi {
 export const researchApi: IResearchApi = {
   getRecentResearches: (userId) => {
     return restApi.get(
-      `/api/v1/research/recent?userId=${userId}&page=0&size=5`
+      `/api/v1/research/recent/updated?userId=${userId}&page=0&size=5`
     );
   },
   createResearch: (newResearchData) => {

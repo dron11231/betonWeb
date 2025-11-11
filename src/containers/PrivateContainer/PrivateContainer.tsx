@@ -1,15 +1,21 @@
-import { Navigate } from 'react-router-dom';
-import { routerPaths } from 'routes/routerPaths';
-import { userStore } from 'stores';
+import { Loader } from 'components/Loader';
+import { authStore, userStore } from 'stores';
 import { observer } from 'utils';
+import s from './privateContainer.scss';
 
 export const PrivateContainer: IFC = observer((props) => {
   const { children } = props;
 
-  const isLoggedIn = userStore.userData?.userId;
+  if (!userStore.userData?.userId) {
+    authStore.getCurrentUser();
+  }
 
-  if (!isLoggedIn) {
-    return <Navigate to={routerPaths.SignIn} />;
+  if (authStore.isLoading) {
+    return (
+      <div className={s.loaderWrapper}>
+        <Loader />
+      </div>
+    );
   }
 
   return <div>{children}</div>;

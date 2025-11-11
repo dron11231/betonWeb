@@ -11,28 +11,26 @@ export const MainNavigation: IFC = (props) => {
   const { pathname } = useLocation();
 
   return (
-    <PrivateContainer>
-      <div className={s.container}>
-        <nav className={s.navigation}>
-          <Link
-            className={classNames(s.link, {
-              [s.active]: pathname === routerPaths.Home,
-            })}
-            to={routerPaths.Home}
-          >
-            <HomeIcon />
-          </Link>
-          <Link
-            className={classNames(s.link, {
-              [s.active]: pathname === routerPaths.Researches,
-            })}
-            to={routerPaths.Researches}
-          >
-            <BiotechIcon />
-          </Link>
-        </nav>
-        {children}
-      </div>
-    </PrivateContainer>
+    <div className={s.container}>
+      <nav className={s.navigation}>
+        <Link
+          className={classNames(s.link, {
+            [s.active]: pathname === routerPaths.Home,
+          })}
+          to={routerPaths.Home}
+        >
+          <HomeIcon />
+        </Link>
+        <Link
+          className={classNames(s.link, {
+            [s.active]: pathname === routerPaths.Researches,
+          })}
+          to={routerPaths.Researches}
+        >
+          <BiotechIcon />
+        </Link>
+      </nav>
+      <PrivateContainer>{children}</PrivateContainer>
+    </div>
   );
 };

@@ -1,5 +1,6 @@
 import { action, makeObservable, observable } from 'mobx';
 import { IAuthApi } from 'api/authApi';
+import { restApi } from 'api/restApi';
 import { EAuthProcessTypes } from 'pages/AuthPage/types';
 import { IUserStore } from 'stores/UserStore';
 import { IAuthData } from './types';
@@ -10,6 +11,7 @@ export interface IAuthStore {
     data: IAuthData,
     authProcessType: EAuthProcessTypes
   ): Promise<void>;
+  getCurrentUser(): Promise<void>;
 }
 
 export class AuthStore implements IAuthStore {
@@ -26,8 +28,26 @@ export class AuthStore implements IAuthStore {
     makeObservable<IAuthStore>(this, {
       isLoading: observable,
       fetchAuthData: action,
+      getCurrentUser: action,
     });
   }
+
+  public getCurrentUser = async () => {
+    try {
+      this.isLoading = true;
+      const response = await this._authApi.getCurrentUser();
+
+      if (response.data.payload) {
+        const { id, email } = response.data.payload;
+
+        this._userStore.setUserData({ userId: id, email });
+        this.isLoading = false;
+      }
+    } catch (error) {
+      this.isLoading = false;
+      console.log('error: ', error);
+    }
+  };
 
   public fetchAuthData = async (
     data: IAuthData,

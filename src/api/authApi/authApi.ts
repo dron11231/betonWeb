@@ -6,6 +6,7 @@ import { IAuthResponse } from './types';
 export interface IAuthApi {
   createNewUser(userData: IAuthData): Promise<TBaseResponse<IAuthResponse>>;
   signIn(userData: IAuthData): Promise<TBaseResponse<IAuthResponse>>;
+  getCurrentUser(): Promise<TBaseResponse<IAuthResponse>>;
 }
 
 export const authApi: IAuthApi = {
@@ -14,5 +15,8 @@ export const authApi: IAuthApi = {
   },
   signIn: (userData) => {
     return restApi.post(`/api/auth/sign-in`, userData);
+  },
+  getCurrentUser: () => {
+    return restApi.get('/api/auth/user');
   },
 };
