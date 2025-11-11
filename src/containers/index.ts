@@ -1,2 +1,2 @@
 export * from './MainNavigation';
-export * from './rivateContaine';
+export * from './PrivateContainer';

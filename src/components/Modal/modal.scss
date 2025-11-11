@@ -1,0 +1,35 @@
+.overlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.6;
+  background-color: #000;
+}
+
+.modal {
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 16px;
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.modalBody {
+  width: 100%;
+}
+
+.modalName {
+  font-size: var(--font-size-large);
+  white-space: nowrap;
+}

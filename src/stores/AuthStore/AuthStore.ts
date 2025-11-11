@@ -5,13 +5,14 @@ import { IUserStore } from 'stores/UserStore';
 import { IAuthData } from './types';
 
 export interface IAuthStore {
-  isLoggedIn: boolean;
   isLoading: boolean;
-  fetchAuthData(data: IAuthData, authProcessType: EAuthProcessTypes): void;
+  fetchAuthData(
+    data: IAuthData,
+    authProcessType: EAuthProcessTypes
+  ): Promise<void>;
 }
 
 export class AuthStore implements IAuthStore {
-  public isLoggedIn: boolean;
   public isLoading: boolean;
 
   private readonly _userStore: IUserStore;
@@ -21,10 +22,8 @@ export class AuthStore implements IAuthStore {
     this._userStore = userStore;
     this._authApi = authApi;
     this.isLoading = false;
-    this.isLoggedIn = false;
 
     makeObservable<IAuthStore>(this, {
-      isLoggedIn: observable,
       isLoading: observable,
       fetchAuthData: action,
     });
@@ -45,7 +44,6 @@ export class AuthStore implements IAuthStore {
       if (response.data?.payload) {
         const { id, email } = response.data.payload;
         this._userStore.setUserData({ userId: id, email });
-        this.isLoggedIn = true;
         this.isLoading = false;
       }
     } catch (error) {

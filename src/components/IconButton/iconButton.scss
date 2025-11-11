@@ -1,0 +1,23 @@
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+
+  &.small {
+    font-size: small;
+    width: 20px;
+    height: 20px;
+  }
+
+  &.medium {
+    width: 24px;
+    height: 24px;
+  }
+
+  &.large {
+    font-size: large;
+    width: 35px;
+    height: 35px;
+  }
+}

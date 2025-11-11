@@ -54,6 +54,7 @@ export default defineConfig({
       IS_LOCAL: JSON.stringify(process.env.IS_LOCAL) || 'false',
     },
   },
+
   tools: {
     lightningcssLoader: true,
     htmlPlugin: {

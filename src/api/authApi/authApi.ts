@@ -1,5 +1,4 @@
-import axios from 'axios';
-import { baseUrl } from 'api/baseUrl';
+import { restApi } from 'api/restApi';
 import { TBaseResponse } from 'api/types';
 import { IAuthData } from 'stores/AuthStore/types';
 import { IAuthResponse } from './types';
@@ -11,9 +10,9 @@ export interface IAuthApi {
 
 export const authApi: IAuthApi = {
   createNewUser: (userData) => {
-    return axios.post(`${baseUrl}/research/api/auth/sign-up`, userData);
+    return restApi.post(`/api/auth/sign-up`, userData);
   },
   signIn: (userData) => {
-    return axios.post(`${baseUrl}/research/api/auth/sign-in`, userData);
+    return restApi.post(`/api/auth/sign-in`, userData);
   },
 };

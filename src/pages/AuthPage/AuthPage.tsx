@@ -23,7 +23,7 @@ export const AuthPage: IFC<IAuthPageProps> = observer((props) => {
   console.log('isLoading', authStore.isLoading);
   console.log('userStore', toJS(userStore.userData));
 
-  if (authStore.isLoggedIn) {
+  if (userStore.userData?.userId) {
     return <Navigate to={routerPaths.Home} />;
   }
 

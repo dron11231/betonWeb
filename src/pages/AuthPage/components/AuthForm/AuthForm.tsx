@@ -6,6 +6,7 @@ import { Button, TextField } from 'components';
 import { EAuthProcessTypes } from 'pages/AuthPage/types';
 import { authStore } from 'stores';
 import { IAuthData } from 'stores/AuthStore/types';
+import { observer } from 'utils';
 import { formTitlesMap, submitButtonTextsMap } from './constants';
 import s from './authForm.scss';
 
@@ -27,7 +28,7 @@ const redirectLinksMap = {
   ),
 };
 
-export const AuthForm: IFC<IAuthFormProps> = (props) => {
+export const AuthForm: IFC<IAuthFormProps> = observer((props) => {
   const { authProccessType, onSubmit } = props;
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -90,6 +91,4 @@ export const AuthForm: IFC<IAuthFormProps> = (props) => {
       {redirectLinksMap[authProccessType]}
     </form>
   );
-};
-
-AuthForm.displayName = 'AuthForm';
+}, 'AuthForm');

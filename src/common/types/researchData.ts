@@ -15,10 +15,16 @@ export enum EResearchPermissionTypes {
 }
 
 export interface IResearchData {
+  id: number;
   userId: number;
-  name: string;
   type: EResearchTypes;
   template: EResearchTemplateTypes;
   access: EResearchAccessTypes;
   permission: EResearchPermissionTypes;
+  name: string;
+  favorite: boolean;
+  status: boolean;
+  createdAt: Date;
+  updatedAt: Date | null;
+  deletedAt: Date | null;
 }
