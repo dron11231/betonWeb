@@ -1,12 +1,14 @@
 import { useEffect } from 'react';
-import { homePageStore } from 'stores';
+import { homePageStore, userStore } from 'stores';
 import { observer } from 'utils';
 import s from './homePage.scss';
 
 export const HomePage: IFC = observer(() => {
   useEffect(() => {
-    homePageStore.getRecentResearchesList();
-  }, []);
+    if (userStore.userData?.userId) {
+      homePageStore.getRecentResearchesList();
+    }
+  }, [userStore.userData?.userId]);
 
   return <div className={s.container}>HomePage</div>;
 }, 'HomePage');

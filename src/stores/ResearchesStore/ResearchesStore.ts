@@ -1,6 +1,5 @@
 import { action, makeObservable, observable } from 'mobx';
 import { IResearchApi } from 'api/researchApi';
-import { TCreateResearchData } from 'api/researchApi/types';
 import { IResearchData } from 'common/types';
 
 export interface IResearchesStore {

@@ -1,0 +1,29 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding: 24px;
+  border-radius: 8px;
+  box-shadow: 0px 0.5px 4px 0px rgba(34, 60, 80, 0.2);
+}
+
+.name {
+  font-weight: var(--font-weight-medium);
+}
+
+.description {
+  font-weight: var(--font-weight-light);
+  margin-top: 6px;
+  margin-bottom: 0;
+  font-size: var(--font-size-small);
+}
+
+.cardImageWrapper {
+  display: flex;
+  justify-content: center;
+
+  svg {
+    width: 150px;
+    height: 150px;
+  }
+}

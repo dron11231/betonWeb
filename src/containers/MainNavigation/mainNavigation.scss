@@ -1,29 +1,27 @@
-$navigation-width: 56px;
-
-.container {
-  padding-left: $navigation-width;
-}
+// .navigationWrapper {
+//   height: 100vh;
+// }
 
 .navigation {
+  z-index: 10;
   display: flex;
-  flex-direction: column;
   position: fixed;
-  max-width: $navigation-width;
+  background-color: #fff;
+  bottom: 0;
   left: 0;
-  height: 100%;
-  box-shadow: rgba(108, 113, 140, 0.28) -0.5px 0px 0px inset;
+  width: 100%;
 }
 
 .link {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0 16px;
   color: var(--text-basic);
-  min-height: 48px;
-
+  padding: 4px 0;
+  width: 100%;
+  border-top: 1px solid rgba(108, 113, 140, 0.28);
   &.active {
     color: var(--active-color);
-    border-right: 1px solid var(--active-color);
+    border-top: 1px solid var(--active-color);
   }
 }

@@ -5,6 +5,10 @@ interface ICreateResearchModalProps {
   onClose: () => void;
 }
 
+/**
+ * @description Модалка создания исследования (используется только в десктоп версии)
+ */
+
 export const CreateResarchModal: IFC<ICreateResearchModalProps> = (props) => {
   const { onClose } = props;
 

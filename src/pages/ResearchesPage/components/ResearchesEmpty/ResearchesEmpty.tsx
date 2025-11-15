@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { TCreateResearchData } from 'api/researchApi/types';
+import { useDevice } from 'common/hooks';
 import { Button } from 'components';
-import { CreateResarchModal } from 'modules';
+import { CreateResarchModal, ResearchCreationPanel } from 'modules';
 import s from './researchesEmpty.scss';
 
 interface IResearchesEmptyProps {
@@ -11,12 +12,19 @@ interface IResearchesEmptyProps {
 export const ResearchesEmpty: IFC<IResearchesEmptyProps> = (props) => {
   const { onCreateResearch } = props;
   const [isModalOpen, setModalOpen] = useState(false);
+  const { isDesktop } = useDevice();
 
   const toggleModalOpen = () => {
     setModalOpen((previousState) => !previousState);
   };
 
   console.log(isModalOpen);
+
+  const createResearchComponent = isDesktop ? (
+    isModalOpen && <CreateResarchModal onClose={toggleModalOpen} />
+  ) : (
+    <ResearchCreationPanel onClose={toggleModalOpen} isOpen={isModalOpen} />
+  );
 
   return (
     <div className={s.researchEmpty}>
@@ -26,7 +34,7 @@ export const ResearchesEmpty: IFC<IResearchesEmptyProps> = (props) => {
         </span>
         <Button onClick={toggleModalOpen}>Создать исследование</Button>
       </div>
-      {isModalOpen && <CreateResarchModal onClose={toggleModalOpen} />}
+      {createResearchComponent}
     </div>
   );
 };

@@ -3,6 +3,10 @@ body {
   margin: 0;
 }
 
+div {
+  box-sizing: border-box;
+}
+
 a {
   text-decoration: none;
   color: #1e88e6;
@@ -21,13 +25,13 @@ h4,
 h5,
 h6 {
   margin: 0;
-  text-align: center;
   font-weight: 400;
   line-height: 24px;
 }
 
 a,
 button {
+  box-sizing: border-box;
   &:active,
   &:focus {
     outline: none;

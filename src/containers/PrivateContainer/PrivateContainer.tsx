@@ -18,5 +18,5 @@ export const PrivateContainer: IFC = observer((props) => {
     );
   }
 
-  return <div>{children}</div>;
+  return <>{children}</>;
 }, 'PrivateContainer');

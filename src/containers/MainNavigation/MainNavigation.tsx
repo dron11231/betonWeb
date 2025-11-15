@@ -11,7 +11,7 @@ export const MainNavigation: IFC = (props) => {
   const { pathname } = useLocation();
 
   return (
-    <div className={s.container}>
+    <div className={s.navigationWrapper}>
       <nav className={s.navigation}>
         <Link
           className={classNames(s.link, {

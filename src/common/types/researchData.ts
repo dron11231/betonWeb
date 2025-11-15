@@ -1,5 +1,6 @@
 export enum EResearchTypes {
   UnModerated = 'UN_MODERATED',
+  Moderated = 'MODERATED',
 }
 
 export enum EResearchTemplateTypes {
