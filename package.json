@@ -6,6 +6,7 @@
     "test": "jest",
     "local+msw": "cross-env MSW_ACTIVE=true IS_LOCAL=true npm run dev",
     "dev": "rsbuild dev",
+    "build": "rsbuild build",
     "local": "cross-env IS_LOCAL=true npm run dev"
   },
   "author": "",
