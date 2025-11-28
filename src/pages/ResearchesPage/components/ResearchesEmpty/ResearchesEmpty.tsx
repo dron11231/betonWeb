@@ -23,7 +23,11 @@ export const ResearchesEmpty: IFC<IResearchesEmptyProps> = (props) => {
   const createResearchComponent = isDesktop ? (
     isModalOpen && <CreateResarchModal onClose={toggleModalOpen} />
   ) : (
-    <ResearchCreationPanel onClose={toggleModalOpen} isOpen={isModalOpen} />
+    <ResearchCreationPanel
+      onCreate={onCreateResearch}
+      onClose={toggleModalOpen}
+      isOpen={isModalOpen}
+    />
   );
 
   return (

@@ -1,12 +1,15 @@
+import { AxiosError } from 'axios';
 import { action, makeObservable, observable } from 'mobx';
 import { IAuthApi } from 'api/authApi';
-import { restApi } from 'api/restApi';
+import { IResponse } from 'api/types';
+import { IErrorResponse } from 'common/types/errorResponse';
 import { EAuthProcessTypes } from 'pages/AuthPage/types';
 import { IUserStore } from 'stores/UserStore';
 import { IAuthData } from './types';
 
 export interface IAuthStore {
   isLoading: boolean;
+  error: IErrorResponse | null | undefined;
   fetchAuthData(
     data: IAuthData,
     authProcessType: EAuthProcessTypes
@@ -16,6 +19,7 @@ export interface IAuthStore {
 
 export class AuthStore implements IAuthStore {
   public isLoading: boolean;
+  public error: IErrorResponse | null | undefined;
 
   private readonly _userStore: IUserStore;
   private readonly _authApi: IAuthApi;
@@ -24,9 +28,11 @@ export class AuthStore implements IAuthStore {
     this._userStore = userStore;
     this._authApi = authApi;
     this.isLoading = false;
+    this.error = null;
 
     makeObservable<IAuthStore>(this, {
       isLoading: observable,
+      error: observable,
       fetchAuthData: action,
       getCurrentUser: action,
     });
@@ -44,7 +50,9 @@ export class AuthStore implements IAuthStore {
         this.isLoading = false;
       }
     } catch (error) {
+      const axiosError: AxiosError<IErrorResponse> = error;
       this.isLoading = false;
+      this.error = axiosError.response?.data;
       console.log('error: ', error);
     }
   };
@@ -67,8 +75,11 @@ export class AuthStore implements IAuthStore {
         this.isLoading = false;
       }
     } catch (error) {
-      console.log(error);
+      const axiosError: AxiosError<IResponse> = error;
       this.isLoading = false;
+      this.error = axiosError.response?.data.errors![0];
+
+      console.log('error: ', error);
     }
   };
 }

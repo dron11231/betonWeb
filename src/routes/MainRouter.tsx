@@ -28,7 +28,7 @@ export const MainRouter = observer(
           }
         />
         <Route
-          path={routerPaths.Researches}
+          path={routerPaths.Favorites}
           element={
             <MainNavigation>
               <ResearchesPage />

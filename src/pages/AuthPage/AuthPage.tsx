@@ -1,6 +1,7 @@
 import { toJS } from 'mobx';
-import { Navigate } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import GoogleIcon from 'assets/icons/googleIcon.svg?svgr';
+import LayersIcon from 'assets/icons/layersIcon.svg?svgr';
 import { Button } from 'components';
 import { routerPaths } from 'routes/routerPaths';
 import { authStore, userStore } from 'stores';
@@ -30,12 +31,23 @@ export const AuthPage: IFC<IAuthPageProps> = observer((props) => {
   return (
     <div className={s.container} data-testid="auth-page">
       <div className={s.formContainer}>
+        <div className={s.welcomeBlock}>
+          <div className={s.iconWrapper}>
+            <LayersIcon />
+          </div>
+          <div className={s.welcomeText}>
+            <h2>Добро пожаловать</h2>
+            <span className={s.description}>
+              Войдите в свой аккаунт, чтобы продолжить
+            </span>
+          </div>
+        </div>
         <div className={s.alternateAuthButtons}>
           <Button className={s.authButton} size="large" icon={<GoogleIcon />}>
             Войти с помощью Google
           </Button>
         </div>
-        <div className={s.separator}>или</div>
+        <div className={s.separator}>или через email</div>
         <AuthForm authProccessType={authProccessType} onSubmit={handleSubmit} />
       </div>
     </div>

@@ -1,10 +1,11 @@
-.card {
+.cardButton {
   display: flex;
   flex-direction: column;
   text-align: center;
-  padding: 24px;
+  padding: 24px !important;
   border-radius: 8px;
   box-shadow: 0px 0.5px 4px 0px rgba(34, 60, 80, 0.2);
+  background-color: #fff;
 }
 
 .name {

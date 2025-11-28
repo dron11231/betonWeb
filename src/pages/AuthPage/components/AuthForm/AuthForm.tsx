@@ -7,7 +7,7 @@ import { EAuthProcessTypes } from 'pages/AuthPage/types';
 import { authStore } from 'stores';
 import { IAuthData } from 'stores/AuthStore/types';
 import { observer } from 'utils';
-import { formTitlesMap, submitButtonTextsMap } from './constants';
+import { submitButtonTextsMap } from './constants';
 import s from './authForm.scss';
 
 interface IAuthFormProps {
@@ -18,12 +18,18 @@ interface IAuthFormProps {
 const redirectLinksMap = {
   [EAuthProcessTypes.SignIn]: (
     <span className={s.offerToRegister}>
-      Нет аккаунта? <Link to="/signUp">Зарегистрируйтесь!</Link>
+      Нет аккаунта?{' '}
+      <Link className={s.link} to="/signUp">
+        Зарегистрируйтесь!
+      </Link>
     </span>
   ),
   [EAuthProcessTypes.SignUp]: (
     <span className={s.offerToRegister}>
-      Уже есть аккаунт? <Link to="/signIn">Авторизируйтесь!</Link>
+      Уже есть аккаунт?{' '}
+      <Link className={s.link} to="/signIn">
+        Авторизируйтесь!
+      </Link>
     </span>
   ),
 };
@@ -32,7 +38,6 @@ export const AuthForm: IFC<IAuthFormProps> = observer((props) => {
   const { authProccessType, onSubmit } = props;
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const formTitle = formTitlesMap[authProccessType];
   const submitButtonText = submitButtonTextsMap[authProccessType];
 
   const handleChangeEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -58,13 +63,12 @@ export const AuthForm: IFC<IAuthFormProps> = observer((props) => {
 
   return (
     <form onSubmit={handleSubmit} className={s.container}>
-      <h2>{formTitle}</h2>
       <TextField
         className={s.textField}
         name="emailField"
         value={email}
-        size="large"
-        labelInner="Email"
+        size="medium"
+        label="Email адрес"
         placeholder="Введите ваш email"
         icon={<MailIcon />}
         onChange={handleChangeEmail}
@@ -72,11 +76,12 @@ export const AuthForm: IFC<IAuthFormProps> = observer((props) => {
       <TextField
         className={s.textField}
         name="passwordField"
-        size="large"
+        size="medium"
         value={password}
-        labelInner="Пароль"
+        label="Пароль"
         placeholder="Введите ваш пароль"
         type="password"
+        error={authStore.error?.text}
         icon={<KeyIcon />}
         onChange={handleChangePassword}
       />

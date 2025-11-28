@@ -13,7 +13,7 @@ export const ResearchesPage: IFC = observer(() => {
     mutationFn: (newResearchData: TCreateResearchData) =>
       researchApi.createResearch(newResearchData),
     onSuccess: (responseData) =>
-      researchesStore.createNewResearch(responseData.data.payload),
+      researchesStore.createNewResearch(responseData.data.payload!),
   });
 
   return (

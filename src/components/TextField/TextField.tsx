@@ -8,6 +8,7 @@ interface ITextFieldProps
   label?: string;
   labelInner?: string;
   size?: TSizeType;
+  error?: string | undefined;
   icon?: JSX.Element;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
@@ -19,6 +20,7 @@ export const TextField: IFC<ITextFieldProps> = (props) => {
     size = 'medium',
     name,
     icon,
+    error,
     labelInner,
     type,
     placeholder,
@@ -37,12 +39,13 @@ export const TextField: IFC<ITextFieldProps> = (props) => {
       <div className={s.inputWrapper}>
         <input
           id={name}
-          className={s.input}
+          className={classNames(s.input, { [s.error]: !!error })}
           value={value}
           placeholder={placeholder}
           onChange={onChange}
           type={type}
         />
+        {!!error && <span className={s.errorText}>{error}</span>}
         {!!icon && <div className={s.icon}>{icon}</div>}
         {!!labelInner && <span className={s.innerLabel}>{labelInner}</span>}
       </div>

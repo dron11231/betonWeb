@@ -1,6 +1,5 @@
 .button {
   font-family: var(--font-base);
-  border-radius: 4px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -8,31 +7,31 @@
   width: fit-content;
 
   &.small {
-    font-size: var(--font-size-small);
-    padding: 2px 8px;
+    border-radius: 8px;
+    font-size: var(--font-size-x-small);
+    padding: 8px 16px;
   }
 
   &.medium {
-    font-size: var(--font-size-medium);
-    padding: 6px 12px;
+    border-radius: 12px;
+    font-size: var(--font-size-small);
+    padding: 12px 24px;
   }
 
   &.large {
-    max-height: 40px;
+    border-radius: 16px;
     font-size: var(--font-size-medium);
-    line-height: 18px;
-    padding: 11px 20px;
+    padding: 16px 32px;
 
     .buttonText {
       display: block;
-      padding-bottom: 2px; // Чтобы текст визуально был по центру относительно иконки
     }
   }
 }
 
 .buttonContent {
   display: flex;
-  gap: 10px; // TODO: Оставить при любых размерах кнопки или должен быть разный?
+  gap: 8px;
   align-items: center;
 }
 

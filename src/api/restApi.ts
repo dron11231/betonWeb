@@ -2,7 +2,7 @@ import axios, { AxiosError } from 'axios';
 import { routerPaths } from 'routes/routerPaths';
 
 export const restApi = axios.create({
-  baseURL: IS_LOCAL ? 'http://localhost:11000' : 'https://ux-search.com',
+  baseURL: IS_LOCAL ? 'http://localhost:10000' : 'https://ux-search.com',
   withCredentials: true,
 });
 
