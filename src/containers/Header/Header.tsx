@@ -31,7 +31,7 @@ export const Header: IFC = ({ children }) => {
           </div>
           <div className={s.mainSectionBlock}>
             <IconButton size="small" className={s.notificationButton}>
-              <div className={s.noticeMark} />
+              {isNewNotice && <div className={s.noticeMark} />}
               <BellIcon />
             </IconButton>
             <Avatar sx={{ width: 32, height: 32 }} className={s.avatar}>
