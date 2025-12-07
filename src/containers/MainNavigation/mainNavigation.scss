@@ -1,3 +1,8 @@
+.navigationLayout {
+  background-color: var(--background-main);
+  height: 100%;
+}
+
 .navigation {
   z-index: 10;
   display: flex;
@@ -6,16 +11,19 @@
   bottom: 0;
   left: 0;
   width: 100%;
+  border-top: 1px solid var(--border-secondary);
 }
 
 .link {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   color: #94a3b8;
-  padding: 4px 0;
+  font-size: var(--font-size-xx-small);
+  padding: 8px 0;
+  gap: 4px;
   width: 100%;
-  border-top: 1px solid rgba(108, 113, 140, 0.28);
 
   &.active {
     color: var(--theme-color);

@@ -2,14 +2,14 @@ import { AxiosError } from 'axios';
 import { action, makeObservable, observable } from 'mobx';
 import { IAuthApi } from 'api/authApi';
 import { IResponse } from 'api/types';
-import { IErrorResponse } from 'common/types/errorResponse';
+import { EErrorFieldTypes } from 'common/types/errorResponse';
 import { EAuthProcessTypes } from 'pages/AuthPage/types';
 import { IUserStore } from 'stores/UserStore';
-import { IAuthData } from './types';
+import { IAuthData, IAuthErrorsMap } from './types';
 
 export interface IAuthStore {
   isLoading: boolean;
-  error: IErrorResponse | null | undefined;
+  errors: IAuthErrorsMap;
   fetchAuthData(
     data: IAuthData,
     authProcessType: EAuthProcessTypes
@@ -19,7 +19,7 @@ export interface IAuthStore {
 
 export class AuthStore implements IAuthStore {
   public isLoading: boolean;
-  public error: IErrorResponse | null | undefined;
+  public errors: IAuthErrorsMap;
 
   private readonly _userStore: IUserStore;
   private readonly _authApi: IAuthApi;
@@ -28,11 +28,14 @@ export class AuthStore implements IAuthStore {
     this._userStore = userStore;
     this._authApi = authApi;
     this.isLoading = false;
-    this.error = null;
+    this.errors = {
+      [EErrorFieldTypes.Email]: null,
+      [EErrorFieldTypes.Password]: null,
+    };
 
     makeObservable<IAuthStore>(this, {
       isLoading: observable,
-      error: observable,
+      errors: observable,
       fetchAuthData: action,
       getCurrentUser: action,
     });
@@ -50,9 +53,9 @@ export class AuthStore implements IAuthStore {
         this.isLoading = false;
       }
     } catch (error) {
-      const axiosError: AxiosError<IErrorResponse> = error;
+      // const axiosError: AxiosError<IErrorResponse> = error;
       this.isLoading = false;
-      this.error = axiosError.response?.data;
+      // this.errors = axiosError.response?.data;
       console.log('error: ', error);
     }
   };
@@ -77,7 +80,17 @@ export class AuthStore implements IAuthStore {
     } catch (error) {
       const axiosError: AxiosError<IResponse> = error;
       this.isLoading = false;
-      this.error = axiosError.response?.data.errors![0];
+      const emailError = axiosError.response?.data.errors!.find(
+        (error) => error.field === EErrorFieldTypes.Email
+      );
+      const passwordError = axiosError.response?.data.errors!.find(
+        (error) => error.field === EErrorFieldTypes.Password
+      );
+
+      this.errors = {
+        [EErrorFieldTypes.Email]: emailError?.text || null,
+        [EErrorFieldTypes.Password]: passwordError?.text || null,
+      };
 
       console.log('error: ', error);
     }

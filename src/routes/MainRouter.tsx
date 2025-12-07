@@ -1,5 +1,5 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
-import { MainNavigation } from 'containers';
+import { Header, MainNavigation } from 'containers';
 import { AuthPage, HomePage, ResearchesPage } from 'pages';
 import { EAuthProcessTypes } from 'pages/AuthPage/types';
 import { userStore } from 'stores';
@@ -19,20 +19,25 @@ export const MainRouter = observer(
           path={routerPaths.SignUp}
           element={<AuthPage authProccessType={EAuthProcessTypes.SignUp} />}
         />
+        {/* TODO: Все роуты ниже нужно вынести в отдельный роутер, который будет обёрнут Header и MainNavigation */}
         <Route
           path={routerPaths.Home}
           element={
-            <MainNavigation>
-              <HomePage userId={userStore.userData?.userId} />
-            </MainNavigation>
+            <Header>
+              <MainNavigation>
+                <HomePage userId={userStore.userData?.userId} />
+              </MainNavigation>
+            </Header>
           }
         />
         <Route
           path={routerPaths.Favorites}
           element={
-            <MainNavigation>
-              <ResearchesPage />
-            </MainNavigation>
+            <Header>
+              <MainNavigation>
+                <ResearchesPage />
+              </MainNavigation>
+            </Header>
           }
         />
       </Routes>

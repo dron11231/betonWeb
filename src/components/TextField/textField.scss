@@ -12,6 +12,10 @@
 
     & .inputWrapper {
       border-radius: 8px;
+
+      &:has(.icon) .input {
+        padding-left: 36px;
+      }
     }
   }
 
@@ -24,6 +28,14 @@
 
     & .inputWrapper {
       border-radius: 12px;
+
+      &:has(.icon) .input {
+        padding-left: 45px;
+      }
+
+      &:has(.icon.right) .input {
+        padding-right: 32px;
+      }
     }
   }
 
@@ -53,10 +65,8 @@
 .inputWrapper {
   position: relative;
   width: 100%;
-
-  &:has(.icon) .input {
-    padding-left: 45px;
-  }
+  display: flex;
+  flex-direction: column;
 }
 
 .input {
@@ -64,14 +74,6 @@
   box-sizing: border-box;
   width: 100%;
   background-color: #fff;
-
-  // &[type='password'] {
-  //   font-family: 'Inter';
-  // }
-
-  &:focus + .icon svg path {
-    fill: var(--theme-color);
-  }
 
   &::placeholder {
     color: var(--text-secondary);
@@ -101,12 +103,15 @@
   position: absolute;
   align-items: center;
   top: 0;
-  left: 12px;
   height: 100%;
   pointer-events: none;
 
-  svg path {
-    fill: #94a3b8;
+  &.left {
+    left: 12px;
+  }
+
+  &.right {
+    right: 12px;
   }
 }
 

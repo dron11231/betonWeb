@@ -1,5 +1,7 @@
 :root {
   --theme-color: #6366f1;
+  --theme-hover-color: #4f47e6;
+  --theme-active-color: #4339cb;
 
   --text-basic: #1e293b;
   --text-description: #64748b;
@@ -8,8 +10,11 @@
   --border-main: #e2e8f0;
   --border-secondary: #f1f5f9;
 
+  --background-main: #f9fafb;
   --background-light: #eff6ff;
   --background-secondary: #f3f4f6;
+  --background-secondary-hover: #e1e7ef;
+  --background-secondary-active: #cad5e0;
 
   --focus-color: #1e88e6;
   --active-color: #0568fd;

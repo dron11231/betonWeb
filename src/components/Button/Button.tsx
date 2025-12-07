@@ -28,6 +28,7 @@ export const Button: IFC<IButtonProps> = (props) => {
     <button
       className={classNames(className, s.button, s[size])}
       onClick={onClick}
+      disabled={isLoading}
     >
       {isLoading && <Loader />}
       <div className={s.buttonContent}>

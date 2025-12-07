@@ -2,24 +2,28 @@ import { useEffect } from 'react';
 import { Loader } from 'components/Loader';
 import { authStore, userStore } from 'stores';
 import { observer } from 'utils';
-import s from './privateContainer.scss';
 
-export const PrivateContainer: IFC = observer((props) => {
-  const { children } = props;
+interface IPrivateContainerProps {
+  hideLoader?: boolean;
+}
 
-  useEffect(() => {
-    if (!userStore.userData?.userId) {
-      authStore.getCurrentUser();
-    }
-  }, [userStore.userData?.userId]);
+export const PrivateContainer: IFC<IPrivateContainerProps> = observer(
+  (props) => {
+    const { children, hideLoader } = props;
+    const isLoaderVisible = authStore.isLoading && !hideLoader;
 
-  if (authStore.isLoading) {
+    useEffect(() => {
+      if (!userStore.userData?.userId) {
+        authStore.getCurrentUser();
+      }
+    }, [userStore.userData?.userId]);
+
     return (
-      <div className={s.loaderWrapper}>
-        <Loader />
-      </div>
+      <>
+        {isLoaderVisible && <Loader />}
+        {children}
+      </>
     );
-  }
-
-  return <>{children}</>;
-}, 'PrivateContainer');
+  },
+  'PrivateContainer'
+);

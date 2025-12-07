@@ -7,6 +7,25 @@
 
 .textField {
   width: 100%;
+
+  input:focus + div .fieldIcon path {
+    fill: var(--theme-color);
+  }
+}
+
+.fieldIcon path {
+  fill: #94a3b8;
+}
+
+.passwordButton {
+  background: none;
+  pointer-events: auto;
+}
+
+.eyeIcon {
+  fill: #94a3b8 !important;
+  width: 20px !important;
+  height: 20px !important;
 }
 
 .submitButton {

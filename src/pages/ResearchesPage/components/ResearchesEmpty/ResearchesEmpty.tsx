@@ -18,8 +18,6 @@ export const ResearchesEmpty: IFC<IResearchesEmptyProps> = (props) => {
     setModalOpen((previousState) => !previousState);
   };
 
-  console.log(isModalOpen);
-
   const createResearchComponent = isDesktop ? (
     isModalOpen && <CreateResarchModal onClose={toggleModalOpen} />
   ) : (

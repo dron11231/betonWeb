@@ -13,7 +13,7 @@ export const MainNavigation: IFC = (props) => {
   const { pathname } = useLocation();
 
   return (
-    <div>
+    <div className={s.navigationLayout}>
       <nav className={s.navigation}>
         <Link
           className={classNames(s.link, {
@@ -22,6 +22,7 @@ export const MainNavigation: IFC = (props) => {
           to={routerPaths.Home}
         >
           <HomeIcon />
+          Главная
         </Link>
         <Link
           className={classNames(s.link, {
@@ -30,6 +31,7 @@ export const MainNavigation: IFC = (props) => {
           to={routerPaths.Favorites}
         >
           <HeartIcon />
+          Избранное
         </Link>
         <Link
           className={classNames(s.link, {
@@ -38,6 +40,7 @@ export const MainNavigation: IFC = (props) => {
           to={'/'}
         >
           <BagIcon />
+          Рабочие области
         </Link>
         <Link
           className={classNames(s.link, {
@@ -46,6 +49,7 @@ export const MainNavigation: IFC = (props) => {
           to={'/'}
         >
           <TrashIcon />
+          Корзина
         </Link>
       </nav>
       <PrivateContainer>{children}</PrivateContainer>
