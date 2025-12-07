@@ -4,4 +4,6 @@ interface IRecentResearchesProps {
   researchesList: IResearchData[];
 }
 
-export const RecentResearches = () => {};
+export const RecentResearches: IFC<IRecentResearchesProps> = () => {
+  return <div></div>;
+};
