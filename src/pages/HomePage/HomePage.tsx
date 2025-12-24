@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
-import { homePageStore, userStore } from 'stores';
+import { homePageStore, researchesStore, userStore } from 'stores';
 import { observer } from 'utils';
+import { RecentResearches } from './components';
 import s from './homePage.scss';
 
 export const HomePage: IFC = observer(() => {
@@ -10,5 +11,9 @@ export const HomePage: IFC = observer(() => {
     }
   }, [userStore.userData?.userId]);
 
-  return <div className={s.container}>HomePage</div>;
+  return (
+    <div className={s.container}>
+      <RecentResearches researchesList={researchesStore.researchesList} />
+    </div>
+  );
 }, 'HomePage');

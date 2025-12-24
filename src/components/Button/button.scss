@@ -6,6 +6,46 @@
   position: relative;
   width: fit-content;
 
+  &.primary {
+    background-color: var(--theme-color);
+    color: #fff;
+
+    &:hover {
+      background-color: var(--theme-hover-color);
+    }
+
+    &:active {
+      background-color: var(--theme-active-color);
+    }
+  }
+
+  &.secondary {
+    background-color: var(--background-secondary);
+
+    &:hover {
+      background-color: var(--background-secondary-hover);
+    }
+
+    &:active {
+      background-color: var(--background-secondary-active);
+    }
+  }
+
+  &.ghost {
+    color: var(--text-basic);
+    background: none;
+    border: 1px solid var(--background-secondary);
+
+    &:hover {
+      border-color: var(--background-secondary-active);
+    }
+
+    &:active {
+      border-color: var(--background-secondary-active);
+      background-color: var(--border-secondary);
+    }
+  }
+
   &.small {
     border-radius: 8px;
     font-size: var(--font-size-x-small);

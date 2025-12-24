@@ -1,13 +1,16 @@
 import { useState } from 'react';
 import { Avatar } from '@mui/material';
+import classNames from 'classnames';
 import BellIcon from 'assets/icons/bell.svg?svgr';
 import ChartIcon from 'assets/icons/chart.svg?svgr';
+import PlusIcon from 'assets/icons/plus.svg?svgr';
 import SearchIcon from 'assets/icons/search.svg?svgr';
-import { IconButton, TextField } from 'components';
+import { Button, IconButton, TextField } from 'components';
 import s from './header.scss';
 
 export const Header: IFC = ({ children }) => {
   const [searchText, setSearchText] = useState('');
+  const [isSearchFocus, setSearchFocus] = useState(false);
   // Временно
   const isNewNotice = true;
 
@@ -19,6 +22,10 @@ export const Header: IFC = ({ children }) => {
     setSearchText(value);
   };
 
+  const toggleSearchFocus = () => {
+    setSearchFocus((previousState) => !previousState);
+  };
+
   return (
     <>
       <div className={s.header}>
@@ -27,7 +34,7 @@ export const Header: IFC = ({ children }) => {
             <div className={s.logo}>
               <ChartIcon />
             </div>
-            <span className={s.title}>UX Search</span>
+            <h1 className={s.title}>UX Search</h1>
           </div>
           <div className={s.mainSectionBlock}>
             <IconButton size="small" className={s.notificationButton}>
@@ -39,15 +46,28 @@ export const Header: IFC = ({ children }) => {
             </Avatar>
           </div>
         </div>
-        <TextField
-          id="search"
-          size="small"
-          placeholder="Найти исследования..."
-          className={s.searchField}
-          iconLeft={<SearchIcon />}
-          value={searchText}
-          onChange={handleChangeSearchText}
-        />
+        <div className={s.searchWrapper}>
+          <TextField
+            onFocus={toggleSearchFocus}
+            onBlur={toggleSearchFocus}
+            id="search"
+            size="small"
+            placeholder="Найти исследования..."
+            className={s.searchField}
+            iconLeft={<SearchIcon />}
+            value={searchText}
+            onChange={handleChangeSearchText}
+          />
+          <Button
+            className={classNames(s.addResearchButton, {
+              [s.compact]: isSearchFocus,
+            })}
+            size="small"
+            icon={<PlusIcon />}
+          >
+            {!isSearchFocus && 'Исследование'}
+          </Button>
+        </div>
       </div>
       {children}
     </>

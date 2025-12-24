@@ -42,7 +42,12 @@ export const AuthPage: IFC<IAuthPageProps> = observer((props) => {
             </div>
           </div>
           <div className={s.alternateAuthButtons}>
-            <Button className={s.authButton} size="large" icon={<GoogleIcon />}>
+            <Button
+              variant="ghost"
+              className={s.authButton}
+              size="large"
+              icon={<GoogleIcon />}
+            >
               Войти с помощью Google
             </Button>
           </div>

@@ -10,6 +10,7 @@ interface IButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   size?: TSizeType;
   icon?: JSX.Element;
   iconSide?: TIconSide;
+  variant?: TVariantType;
 }
 
 export const Button: IFC<IButtonProps> = (props) => {
@@ -17,6 +18,7 @@ export const Button: IFC<IButtonProps> = (props) => {
     children,
     size = 'medium',
     isLoading,
+    variant = 'primary',
     icon,
     className,
     iconSide = 'left',
@@ -26,7 +28,7 @@ export const Button: IFC<IButtonProps> = (props) => {
   const iconRightSide = !!icon && iconSide === 'right';
   return (
     <button
-      className={classNames(className, s.button, s[size])}
+      className={classNames(className, s.button, s[size], s[variant])}
       onClick={onClick}
       disabled={isLoading}
     >

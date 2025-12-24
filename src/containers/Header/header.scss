@@ -7,7 +7,7 @@
   left: 0;
   gap: 12px;
   background-color: #fff;
-  padding: 16px 12px 12px;
+  padding: 16px;
 }
 
 .mainSection {
@@ -61,8 +61,17 @@
 }
 
 .searchField {
+  flex: 1;
+
+  &:has(input:focus) {
+    .addResearchButton {
+      background-color: red !important;
+    }
+  }
+
   & input {
     border-radius: 12px !important;
+    width: 100%;
 
     &:focus {
       border: 2px solid rgba(99, 101, 241, 0.3);
@@ -77,4 +86,15 @@
       color: #adaebc;
     }
   }
+}
+
+.searchWrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.addResearchButton {
+  flex-shrink: 0;
+  border-radius: 12px !important;
 }
