@@ -3,16 +3,51 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  height: 100%;
 }
 
 .formContainer {
   display: flex;
   flex-direction: column;
   gap: 24px;
-  padding: 24px;
-  border-radius: 8px;
-  box-shadow: var(--base-container-shadow);
+  border-radius: 32px;
+  max-width: 289px;
+
+  // Использовать закомменченные стили для десктопа
+  // padding: 40px;
+  // box-shadow: var(--base-container-shadow);
+}
+
+.welcomeBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+
+  .iconWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 48px;
+    height: 48px;
+    background-color: var(--background-light);
+    border-radius: 12px;
+  }
+}
+
+.welcomeText {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  .description {
+    font-size: var(--font-size-small);
+    font-weight: var(--font-weight-light);
+    color: var(--text-description);
+  }
 }
 
 .alternateAuthButtons {
@@ -20,21 +55,22 @@
   flex-direction: column;
 
   .authButton {
+    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
+    border: 1px solid #e5e7eb;
     background-color: #fff;
-    box-shadow: var(--base-button-shadow);
   }
 }
 
 .separator {
   text-align: center;
-  color: var(--text-basic);
-  font-size: var(--font-size-small);
+  color: var(--text-secondary);
+  font-size: var(--font-size-x-small);
 
   &::before {
     content: '';
     display: inline-block;
-    width: 40%;
-    border-bottom: 1px solid #ccc;
+    width: 78px;
+    border-bottom: 1px solid var(--border-main);
     margin-right: 8px;
     vertical-align: middle;
   }
@@ -42,8 +78,8 @@
   &::after {
     content: '';
     display: inline-block;
-    width: 40%;
-    border-bottom: 1px solid #ccc;
+    width: 78px;
+    border-bottom: 1px solid var(--border-main);
     margin-left: 8px;
     vertical-align: middle;
   }

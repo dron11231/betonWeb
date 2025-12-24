@@ -1,0 +1,36 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.imageWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  background-color: var(--background-light);
+}
+
+.textWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-self: center;
+  text-align: center;
+  gap: 12px;
+}
+
+.title {
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-bold);
+}
+
+.description {
+  font-size: var(--font-size-x-small);
+  color: var(--text-secondary);
+}

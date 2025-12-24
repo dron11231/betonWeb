@@ -1,0 +1,32 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  gap: 16px;
+  padding: 16px;
+  width: 90%;
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  font-size: var(--font-size-medium);
+  font-weight: var(--font-weight-bold);
+}
+
+.button {
+  color: var(--theme-color) !important;
+  padding: 0 !important;
+  background: none !important;
+  border: none !important;
+
+  &:hover {
+    color: var(--theme-hover-color) !important;
+  }
+}

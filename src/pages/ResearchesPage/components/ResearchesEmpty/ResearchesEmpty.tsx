@@ -1,0 +1,42 @@
+import { useState } from 'react';
+import { TCreateResearchData } from 'api/researchApi/types';
+import { useDevice } from 'common/hooks';
+import { Button } from 'components';
+import { CreateResarchModal, ResearchCreationPanel } from 'modules';
+import s from './researchesEmpty.scss';
+
+interface IResearchesEmptyProps {
+  onCreateResearch: (newResearchData: TCreateResearchData) => void;
+}
+
+export const ResearchesEmpty: IFC<IResearchesEmptyProps> = (props) => {
+  const { onCreateResearch } = props;
+  const [isModalOpen, setModalOpen] = useState(false);
+  const { isDesktop } = useDevice();
+
+  const toggleModalOpen = () => {
+    setModalOpen((previousState) => !previousState);
+  };
+
+  const createResearchComponent = isDesktop ? (
+    isModalOpen && <CreateResarchModal onClose={toggleModalOpen} />
+  ) : (
+    <ResearchCreationPanel
+      onCreate={onCreateResearch}
+      onClose={toggleModalOpen}
+      isOpen={isModalOpen}
+    />
+  );
+
+  return (
+    <div className={s.researchEmpty}>
+      <div className={s.createFirstResearchContainer}>
+        <span>
+          У вас пока нет исследований. <br /> Создайте первое!
+        </span>
+        <Button onClick={toggleModalOpen}>Создать исследование</Button>
+      </div>
+      {createResearchComponent}
+    </div>
+  );
+};
