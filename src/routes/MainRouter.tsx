@@ -19,7 +19,7 @@ export const MainRouter = observer(
           path={routerPaths.SignUp}
           element={<AuthPage authProccessType={EAuthProcessTypes.SignUp} />}
         />
-        {/* TODO: Все роуты ниже нужно вынести в отдельный роутер, который будет обёрнут Header и MainNavigation */}
+        {/* TODO: Все роуты ниже нужно вынести в отдельный роутер, который будет обёрнут Header и MainNavigation, после этого нужно вынести CreateResearchScreen из MainNavigation */}
         <Route
           path={routerPaths.Home}
           element={

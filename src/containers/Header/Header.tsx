@@ -6,11 +6,13 @@ import ChartIcon from 'assets/icons/chart.svg?svgr';
 import PlusIcon from 'assets/icons/plus.svg?svgr';
 import SearchIcon from 'assets/icons/search.svg?svgr';
 import { Button, IconButton, TextField } from 'components';
+import { researchesStore } from 'stores';
 import s from './header.scss';
 
 export const Header: IFC = ({ children }) => {
   const [searchText, setSearchText] = useState('');
   const [isSearchFocus, setSearchFocus] = useState(false);
+  const { toggleCreateResearchScreen } = researchesStore;
   // Временно
   const isNewNotice = true;
 
@@ -58,15 +60,24 @@ export const Header: IFC = ({ children }) => {
             value={searchText}
             onChange={handleChangeSearchText}
           />
-          <Button
-            className={classNames(s.addResearchButton, {
-              [s.compact]: isSearchFocus,
-            })}
-            size="small"
-            icon={<PlusIcon />}
-          >
-            {!isSearchFocus && 'Исследование'}
-          </Button>
+          {isSearchFocus ? (
+            <IconButton
+              onClick={toggleCreateResearchScreen}
+              variant="primary"
+              size="small"
+            >
+              <PlusIcon />
+            </IconButton>
+          ) : (
+            <Button
+              onClick={toggleCreateResearchScreen}
+              className={s.addResearchButton}
+              size="small"
+              icon={<PlusIcon />}
+            >
+              Исследование
+            </Button>
+          )}
         </div>
       </div>
       {children}
