@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { observer } from 'mobx-react-lite';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, PathMatch, useMatch } from 'react-router-dom';
 import BagIcon from 'assets/icons/bag.svg?svgr';
 import HeartIcon from 'assets/icons/heartIcon.svg?svgr';
 import HomeIcon from 'assets/icons/homeIcon.svg?svgr';
@@ -13,7 +13,9 @@ import s from './mainNavigation.scss';
 
 export const MainNavigation: IFC = observer((props) => {
   const { children } = props;
-  const { pathname } = useLocation();
+  const { params } = useMatch('/app/*') as PathMatch;
+  const currentPage = params['*'];
+
   const { isCreateResearchOpen } = researchesStore;
 
   return (
@@ -22,18 +24,18 @@ export const MainNavigation: IFC = observer((props) => {
         <nav className={s.navigation}>
           <Link
             className={classNames(s.link, {
-              [s.active]: pathname === routerPaths.Home,
+              [s.active]: currentPage === routerPaths.App.Home,
             })}
-            to={routerPaths.Home}
+            to={routerPaths.App.Home}
           >
             <HomeIcon />
             Главная
           </Link>
           <Link
             className={classNames(s.link, {
-              [s.active]: pathname === routerPaths.Favorites,
+              [s.active]: currentPage === routerPaths.App.Favorites,
             })}
-            to={routerPaths.Favorites}
+            to={routerPaths.App.Favorites}
           >
             <HeartIcon />
             Избранное

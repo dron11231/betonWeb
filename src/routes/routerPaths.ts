@@ -1,6 +1,11 @@
 export const routerPaths = {
+  Root: '/',
   SignIn: '/signIn',
   SignUp: '/signUp',
-  Home: '/home',
-  Favorites: '/favorites',
+
+  App: {
+    Root: '/app/',
+    Home: 'home',
+    Favorites: 'favorites',
+  },
 };

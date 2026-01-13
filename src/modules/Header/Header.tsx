@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Avatar } from '@mui/material';
-import classNames from 'classnames';
 import BellIcon from 'assets/icons/bell.svg?svgr';
 import ChartIcon from 'assets/icons/chart.svg?svgr';
 import PlusIcon from 'assets/icons/plus.svg?svgr';

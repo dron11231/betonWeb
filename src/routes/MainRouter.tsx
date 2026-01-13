@@ -1,5 +1,11 @@
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
-import { Header, MainNavigation } from 'containers';
+import {
+  BrowserRouter,
+  Navigate,
+  Outlet,
+  Route,
+  Routes,
+} from 'react-router-dom';
+import { Header, MainNavigation } from 'modules';
 import { AuthPage, HomePage, ResearchesPage } from 'pages';
 import { EAuthProcessTypes } from 'pages/AuthPage/types';
 import { userStore } from 'stores';
@@ -10,7 +16,10 @@ export const MainRouter = observer(
   () => (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Navigate to="/home" replace />} />
+        <Route
+          path={routerPaths.Root}
+          element={<Navigate to={routerPaths.App.Root} />}
+        />
         <Route
           path={routerPaths.SignIn}
           element={<AuthPage authProccessType={EAuthProcessTypes.SignIn} />}
@@ -19,27 +28,30 @@ export const MainRouter = observer(
           path={routerPaths.SignUp}
           element={<AuthPage authProccessType={EAuthProcessTypes.SignUp} />}
         />
-        {/* TODO: Все роуты ниже нужно вынести в отдельный роутер, который будет обёрнут Header и MainNavigation, после этого нужно вынести CreateResearchScreen из MainNavigation */}
+
         <Route
-          path={routerPaths.Home}
+          path={routerPaths.App.Root}
           element={
             <Header>
               <MainNavigation>
-                <HomePage userId={userStore.userData?.userId} />
+                <Outlet />
               </MainNavigation>
             </Header>
           }
-        />
-        <Route
-          path={routerPaths.Favorites}
-          element={
-            <Header>
-              <MainNavigation>
-                <ResearchesPage />
-              </MainNavigation>
-            </Header>
-          }
-        />
+        >
+          <Route
+            index
+            element={<Navigate to={routerPaths.App.Home} replace />}
+          />
+          <Route
+            path={routerPaths.App.Home}
+            element={<HomePage userId={userStore.userData?.userId} />}
+          />
+          <Route
+            path={routerPaths.App.Favorites}
+            element={<ResearchesPage />}
+          />
+        </Route>
       </Routes>
     </BrowserRouter>
   ),
