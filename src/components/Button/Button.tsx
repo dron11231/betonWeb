@@ -5,7 +5,7 @@ import s from './button.scss';
 
 type TIconSide = 'left' | 'right';
 
-interface IButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface IButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   isLoading?: boolean;
   size?: TSizeType;
   icon?: JSX.Element;
@@ -23,6 +23,7 @@ export const Button: IFC<IButtonProps> = (props) => {
     className,
     iconSide = 'left',
     onClick,
+    ...otherProps
   } = props;
   const iconLeftSide = !!icon && iconSide === 'left';
   const iconRightSide = !!icon && iconSide === 'right';
@@ -31,6 +32,7 @@ export const Button: IFC<IButtonProps> = (props) => {
       className={classNames(className, s.button, s[size], s[variant])}
       onClick={onClick}
       disabled={isLoading}
+      {...otherProps}
     >
       {isLoading && <Loader />}
       <div className={s.buttonContent}>
