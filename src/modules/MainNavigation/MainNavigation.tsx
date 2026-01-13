@@ -6,17 +6,16 @@ import HeartIcon from 'assets/icons/heartIcon.svg?svgr';
 import HomeIcon from 'assets/icons/homeIcon.svg?svgr';
 import TrashIcon from 'assets/icons/trash.svg?svgr';
 import { PrivateContainer } from 'containers';
+import { useCreateResearch } from 'hooks';
 import { CreateResearchScreen } from 'modules';
 import { routerPaths } from 'routes/routerPaths';
-import { researchesStore } from 'stores';
 import s from './mainNavigation.scss';
 
 export const MainNavigation: IFC = observer((props) => {
   const { children } = props;
   const { params } = useMatch('/app/*') as PathMatch;
+  const { isCreateResearchOpen } = useCreateResearch();
   const currentPage = params['*'];
-
-  const { isCreateResearchOpen } = researchesStore;
 
   return (
     <>

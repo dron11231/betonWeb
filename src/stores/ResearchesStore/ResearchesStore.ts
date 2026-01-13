@@ -4,9 +4,7 @@ import { IResearchData } from 'common/types';
 
 export interface IResearchesStore {
   researchesList: IResearchData[];
-  isCreateResearchOpen: boolean;
   createNewResearch: (newResearchData: IResearchData) => Promise<void>;
-  toggleCreateResearchScreen: () => void;
 }
 
 export class ResearchesStore implements IResearchesStore {
@@ -22,14 +20,9 @@ export class ResearchesStore implements IResearchesStore {
 
     makeObservable<IResearchesStore>(this, {
       researchesList: observable,
-      isCreateResearchOpen: observable,
       createNewResearch: action,
     });
   }
-
-  public toggleCreateResearchScreen = () => {
-    this.isCreateResearchOpen = !this.isCreateResearchOpen;
-  };
 
   public createNewResearch = async (newResearchData: IResearchData) => {
     this.researchesList = [...this.researchesList, newResearchData];

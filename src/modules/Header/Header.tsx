@@ -5,19 +5,17 @@ import ChartIcon from 'assets/icons/chart.svg?svgr';
 import PlusIcon from 'assets/icons/plus.svg?svgr';
 import SearchIcon from 'assets/icons/search.svg?svgr';
 import { Button, IconButton, TextField } from 'components';
-import { researchesStore } from 'stores';
+import { useCreateResearch } from 'hooks';
 import s from './header.scss';
 
 export const Header: IFC = ({ children }) => {
   const [searchText, setSearchText] = useState('');
   const [isSearchFocus, setSearchFocus] = useState(false);
-  const { toggleCreateResearchScreen } = researchesStore;
+  const { openCreateResearch } = useCreateResearch();
   // Временно
   const isNewNotice = true;
 
-  const handleChangeSearchText = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const handleChangeSearchText = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
 
     setSearchText(value);
@@ -25,6 +23,10 @@ export const Header: IFC = ({ children }) => {
 
   const toggleSearchFocus = () => {
     setSearchFocus((previousState) => !previousState);
+  };
+
+  const handleOpenCreateResearch = () => {
+    openCreateResearch();
   };
 
   return (
@@ -60,20 +62,11 @@ export const Header: IFC = ({ children }) => {
             onChange={handleChangeSearchText}
           />
           {isSearchFocus ? (
-            <IconButton
-              onClick={toggleCreateResearchScreen}
-              variant="primary"
-              size="small"
-            >
+            <IconButton onMouseDown={handleOpenCreateResearch} variant="primary" size="small">
               <PlusIcon />
             </IconButton>
           ) : (
-            <Button
-              onClick={toggleCreateResearchScreen}
-              className={s.addResearchButton}
-              size="small"
-              icon={<PlusIcon />}
-            >
+            <Button onClick={openCreateResearch} className={s.addResearchButton} size="small" icon={<PlusIcon />}>
               Исследование
             </Button>
           )}
