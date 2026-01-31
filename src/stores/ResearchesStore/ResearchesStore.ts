@@ -44,7 +44,7 @@ export class ResearchesStore extends BaseStore implements IResearchesStore {
 
   public createNewResearch = async (newResearchData: TCreateResearchData) => {
     try {
-      const response = await this._researchApi.createResearch(newResearchData);
+      const response = await this.executeRequest(() => this._researchApi.createResearch(newResearchData)); // TODO: executeRequest
 
       runInAction(() => {
         if (response.data.payload) {

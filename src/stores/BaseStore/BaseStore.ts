@@ -14,6 +14,12 @@ export abstract class BaseStore implements IBaseStore {
     });
   }
 
+  protected executeRequest = async (request: () => Promise<void>) => {
+    this.isLoading = true;
+    await request();
+    this.isLoading = false;
+  };
+
   protected handleError = (error) => {
     this.isLoading = false;
 
