@@ -1,26 +1,31 @@
 import { useState } from 'react';
+import { observer } from 'mobx-react-lite';
 import ArrowLeftIcon from 'assets/icons/arrowLeft.svg?svgr';
 import PlusIcon from 'assets/icons/plus.svg?svgr';
-import { EResearchTypes } from 'common/types';
+import { EResearchAccessTypes, EResearchPermissionTypes, EResearchTemplateTypes, EResearchTypes } from 'common/types';
 import { Button, IconButton, ISegmentButtonData, SegmentSelect, TextField } from 'components';
 import { useCreateResearch } from 'hooks';
+import { researchesStore, userStore } from 'stores';
+import { EResearchErrorTypes } from 'stores/ResearchesStore/types';
 import s from './createResearchScreen.scss';
 
-export const CreateResearchScreen: IFC = () => {
+const researchTypeButtons: ISegmentButtonData[] = [
+  {
+    text: 'Немодерируемое',
+    value: EResearchTypes.UnModerated,
+  },
+  {
+    text: 'Модерируемое',
+    value: EResearchTypes.Moderated,
+  },
+];
+
+export const CreateResearchScreen: IFC = observer(() => {
   const { closeCreateResearch } = useCreateResearch();
   const [researchType, setResearchType] = useState(EResearchTypes.UnModerated);
   const [researchName, setResearchName] = useState('');
-
-  const researchTypeButtons: ISegmentButtonData[] = [
-    {
-      text: 'Немодерируемое',
-      value: EResearchTypes.UnModerated,
-    },
-    {
-      text: 'Модерируемое',
-      value: EResearchTypes.Moderated,
-    },
-  ];
+  const { userData } = userStore;
+  const { createNewResearch, clearError, errors } = researchesStore;
 
   const handleChangeResearchType = (value: EResearchTypes) => {
     setResearchType(value);
@@ -28,8 +33,23 @@ export const CreateResearchScreen: IFC = () => {
 
   const handleChangeResearchName = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
-
+    if (errors.name) {
+      clearError();
+    }
     setResearchName(value);
+  };
+
+  const handleCreateResearch = () => {
+    if (userData?.userId) {
+      createNewResearch({
+        name: researchName,
+        type: researchType,
+        userId: userData?.userId,
+        template: EResearchTemplateTypes.Blank,
+        access: EResearchAccessTypes.Private,
+        permission: EResearchPermissionTypes.Write,
+      });
+    }
   };
 
   return (
@@ -51,6 +71,7 @@ export const CreateResearchScreen: IFC = () => {
             buttonsList={researchTypeButtons}
           />
           <TextField
+            error={errors[EResearchErrorTypes.Name]}
             className={s.textField}
             onChange={handleChangeResearchName}
             value={researchName}
@@ -70,10 +91,10 @@ export const CreateResearchScreen: IFC = () => {
             </Button>
           </div>
         </div>
-        <Button size="large" className={s.createResearchButton}>
+        <Button onClick={handleCreateResearch} size="large" className={s.createResearchButton}>
           Создать исследование
         </Button>
       </div>
     </div>
   );
-};
+});

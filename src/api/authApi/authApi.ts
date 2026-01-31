@@ -1,11 +1,11 @@
 import { restApi } from 'api/restApi';
 import { TBaseResponse } from 'api/types';
-import { IAuthData } from 'stores/AuthStore/types';
+import { EErrorAuthFieldTypes, IAuthData } from 'stores/AuthStore/types';
 import { IAuthResponse } from './types';
 
 export interface IAuthApi {
-  createNewUser(userData: IAuthData): Promise<TBaseResponse<IAuthResponse>>;
-  signIn(userData: IAuthData): Promise<TBaseResponse<IAuthResponse>>;
+  createNewUser(userData: IAuthData): Promise<TBaseResponse<IAuthResponse, EErrorAuthFieldTypes>>;
+  signIn(userData: IAuthData): Promise<TBaseResponse<IAuthResponse, EErrorAuthFieldTypes>>;
   getCurrentUser(): Promise<TBaseResponse<IAuthResponse>>;
 }
 
