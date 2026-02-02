@@ -47,6 +47,8 @@ export const AuthForm: IFC<IAuthFormProps> = observer((props) => {
 
   const handleChangeEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
+
+    authStore.clearError();
     event.preventDefault();
     setEmail(value);
   };
@@ -63,6 +65,7 @@ export const AuthForm: IFC<IAuthFormProps> = observer((props) => {
 
   const handleChangePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
+    authStore.clearError();
 
     setPassword(value);
   };

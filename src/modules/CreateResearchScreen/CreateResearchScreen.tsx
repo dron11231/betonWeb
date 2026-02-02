@@ -91,7 +91,12 @@ export const CreateResearchScreen: IFC = observer(() => {
             </Button>
           </div>
         </div>
-        <Button onClick={handleCreateResearch} size="large" className={s.createResearchButton}>
+        <Button
+          isLoading={researchesStore.isLoading}
+          onClick={handleCreateResearch}
+          size="large"
+          className={s.createResearchButton}
+        >
           Создать исследование
         </Button>
       </div>

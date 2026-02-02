@@ -4,7 +4,7 @@ export interface IAuthData {
 }
 
 export enum EErrorAuthFieldTypes {
-  Email = 'EMAIL',
+  Email = 'email', // TODO: Требуется замена на верхний регистр
   Password = 'PASSWORD',
 }
 

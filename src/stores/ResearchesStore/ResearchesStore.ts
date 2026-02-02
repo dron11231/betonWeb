@@ -1,13 +1,13 @@
 import { AxiosError } from 'axios';
-import { action, makeObservable, observable, runInAction } from 'mobx';
+import { action, makeObservable, observable } from 'mobx';
 import { IResearchApi } from 'api/researchApi';
 import { TCreateResearchData } from 'api/researchApi/types';
 import { IResponse } from 'api/types';
 import { IResearchData } from 'common/types';
-import { BaseStore } from 'stores/BaseStore';
+import { BaseStore, IBaseStore } from 'stores/BaseStore';
 import { EResearchErrorTypes, TResearchErrorsMap } from './types';
 
-export interface IResearchesStore {
+export interface IResearchesStore extends IBaseStore {
   readonly errors: Readonly<TResearchErrorsMap>;
   researchesList: IResearchData[];
   createNewResearch: (newResearchData: TCreateResearchData) => Promise<void>;
@@ -43,23 +43,15 @@ export class ResearchesStore extends BaseStore implements IResearchesStore {
   };
 
   public createNewResearch = async (newResearchData: TCreateResearchData) => {
-    try {
-      const response = await this.executeRequest(() => this._researchApi.createResearch(newResearchData)); // TODO: executeRequest
+    const request = () => this._researchApi.createResearch(newResearchData);
 
-      runInAction(() => {
-        if (response.data.payload) {
-          this.researchesList = [...this.researchesList, response.data.payload];
-        }
-      });
-    } catch (error) {
-      this.handleError(error);
-      const axiosError: AxiosError<IResponse<null, EResearchErrorTypes>> = error;
+    const success = (responseData: IResearchData) => (this.researchesList = [...this.researchesList, responseData]);
 
-      runInAction(() => {
-        axiosError.response?.data.errors!.forEach((error) => {
-          this.errors[error.field] = error.text;
-        });
+    const error = (error: AxiosError<IResponse<null, EResearchErrorTypes>>) =>
+      error.response?.data.errors!.forEach((error) => {
+        this.errors[error.field] = error.text;
       });
-    }
+
+    this.executeRequest(request, success, error);
   };
 }
