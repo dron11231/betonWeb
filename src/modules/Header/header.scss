@@ -63,12 +63,6 @@
 .searchField {
   flex: 1;
 
-  &:has(input:focus) {
-    .addResearchButton {
-      background-color: red !important;
-    }
-  }
-
   & input {
     border-radius: 12px !important;
     width: 100%;

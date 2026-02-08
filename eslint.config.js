@@ -4,6 +4,7 @@ import { defineConfig } from 'eslint/config';
 import pluginCssModules from 'eslint-plugin-css-modules';
 import pluginImport from 'eslint-plugin-import';
 import pluginReact from 'eslint-plugin-react';
+import pluginUnusedImports from 'eslint-plugin-unused-imports';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
 
@@ -15,7 +16,8 @@ export default defineConfig([
       js,
       import: pluginImport,
       'css-modules': pluginCssModules,
-      pluginReact,
+      react: pluginReact,
+      'unused-imports': pluginUnusedImports,
     },
     extends: ['js/recommended'],
     languageOptions: {
@@ -40,6 +42,7 @@ export default defineConfig([
       'import/no-unresolved': ['error', { ignore: ['\\.svg\\?svgr$'] }],
       'import/no-duplicates': ['error', { considerQueryString: true }],
       'no-duplicate-imports': 'error',
+      'unused-imports/no-unused-imports': 'error',
       '@typescript-eslint/naming-convention': [
         'error',
         {

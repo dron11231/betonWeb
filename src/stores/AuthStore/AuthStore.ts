@@ -1,98 +1,73 @@
 import { AxiosError } from 'axios';
 import { action, makeObservable, observable } from 'mobx';
-import { IAuthApi } from 'api/authApi';
+import { IAuthApi, IAuthResponse } from 'api/authApi';
 import { IResponse } from 'api/types';
-import { EErrorFieldTypes } from 'common/types/errorResponse';
 import { EAuthProcessTypes } from 'pages/AuthPage/types';
+import { BaseStore, IBaseStore } from 'stores/BaseStore';
 import { IUserStore } from 'stores/UserStore';
-import { IAuthData, IAuthErrorsMap } from './types';
+import { EErrorAuthFieldTypes, IAuthData, TAuthErrorsMap } from './types';
 
-export interface IAuthStore {
-  isLoading: boolean;
-  errors: IAuthErrorsMap;
-  fetchAuthData(
-    data: IAuthData,
-    authProcessType: EAuthProcessTypes
-  ): Promise<void>;
+export interface IAuthStore extends IBaseStore {
+  errors: TAuthErrorsMap;
+  fetchAuthData(data: IAuthData, authProcessType: EAuthProcessTypes): Promise<void>;
   getCurrentUser(): Promise<void>;
+  clearError(): void;
 }
 
-export class AuthStore implements IAuthStore {
-  public isLoading: boolean;
-  public errors: IAuthErrorsMap;
-
+export class AuthStore extends BaseStore implements IAuthStore {
+  public errors: TAuthErrorsMap;
   private readonly _userStore: IUserStore;
   private readonly _authApi: IAuthApi;
 
   constructor(userStore: IUserStore, authApi: IAuthApi) {
+    super();
     this._userStore = userStore;
     this._authApi = authApi;
-    this.isLoading = false;
     this.errors = {
-      [EErrorFieldTypes.Email]: null,
-      [EErrorFieldTypes.Password]: null,
+      [EErrorAuthFieldTypes.Email]: null,
+      [EErrorAuthFieldTypes.Password]: null,
     };
 
     makeObservable<IAuthStore>(this, {
-      isLoading: observable,
       errors: observable,
-      fetchAuthData: action,
       getCurrentUser: action,
+      fetchAuthData: action,
+      clearError: action,
     });
   }
 
-  public getCurrentUser = async () => {
-    try {
-      this.isLoading = true;
-      const response = await this._authApi.getCurrentUser();
-
-      if (response.data.payload) {
-        const { id, email } = response.data.payload;
-
-        this._userStore.setUserData({ userId: id, email });
-        this.isLoading = false;
-      }
-    } catch (error) {
-      // const axiosError: AxiosError<IErrorResponse> = error;
-      this.isLoading = false;
-      // this.errors = axiosError.response?.data;
-      console.log('error: ', error);
+  public clearError = () => {
+    if (this.errors.email !== null || this.errors.PASSWORD !== null) {
+      this.errors = {
+        [EErrorAuthFieldTypes.Email]: null,
+        [EErrorAuthFieldTypes.Password]: null,
+      };
     }
   };
 
-  public fetchAuthData = async (
-    data: IAuthData,
-    authProcessType: EAuthProcessTypes
-  ) => {
-    try {
-      const authRequestsMap = {
-        [EAuthProcessTypes.SignUp]: this._authApi.createNewUser,
-        [EAuthProcessTypes.SignIn]: this._authApi.signIn,
-      };
-      this.isLoading = true;
-      const response = await authRequestsMap[authProcessType](data);
+  public getCurrentUser = async () => {
+    const request = () => this._authApi.getCurrentUser();
 
-      if (response.data?.payload) {
-        const { id, email } = response.data.payload;
-        this._userStore.setUserData({ userId: id, email });
-        this.isLoading = false;
-      }
-    } catch (error) {
-      const axiosError: AxiosError<IResponse> = error;
-      this.isLoading = false;
-      const emailError = axiosError.response?.data.errors!.find(
-        (error) => error.field === EErrorFieldTypes.Email
-      );
-      const passwordError = axiosError.response?.data.errors!.find(
-        (error) => error.field === EErrorFieldTypes.Password
-      );
+    const success = ({ id, email }: IAuthResponse) => this._userStore.setUserData({ userId: id, email });
 
-      this.errors = {
-        [EErrorFieldTypes.Email]: emailError?.text || null,
-        [EErrorFieldTypes.Password]: passwordError?.text || null,
-      };
+    this.executeRequest(request, success);
+  };
 
-      console.log('error: ', error);
-    }
+  public fetchAuthData = async (data: IAuthData, authProcessType: EAuthProcessTypes) => {
+    const authRequestsMap = {
+      [EAuthProcessTypes.SignUp]: this._authApi.createNewUser,
+      [EAuthProcessTypes.SignIn]: this._authApi.signIn,
+    };
+
+    const request = () => authRequestsMap[authProcessType](data);
+
+    const success = ({ id, email }: IAuthResponse) => this._userStore.setUserData({ userId: id, email });
+
+    const error = (error: AxiosError<IResponse<null, EErrorAuthFieldTypes>>) => {
+      const errorData = error.response!.data.errors![0];
+      this.errors[errorData.field] = errorData.text;
+    };
+
+    this.executeRequest(request, success, error);
   };
 }

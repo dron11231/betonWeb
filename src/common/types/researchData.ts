@@ -1,5 +1,5 @@
 export enum EResearchTypes {
-  UnModerated = 'UN_MODERATED',
+  UnModerated = 'UNMODERATED',
   Moderated = 'MODERATED',
 }
 

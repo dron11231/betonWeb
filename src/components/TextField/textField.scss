@@ -86,6 +86,7 @@
 
   &.error {
     border: 2px solid var(--error-color);
+    background-color: var(--error-background);
   }
 }
 

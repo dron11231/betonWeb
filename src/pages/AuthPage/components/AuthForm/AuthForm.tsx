@@ -4,11 +4,10 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { Link } from 'react-router-dom';
 import KeyIcon from 'assets/icons/keyIcon.svg?svgr';
 import MailIcon from 'assets/icons/mailIcon.svg?svgr';
-import { EErrorFieldTypes } from 'common/types/errorResponse';
 import { Button, IconButton, TextField } from 'components';
 import { EAuthProcessTypes } from 'pages/AuthPage/types';
 import { authStore } from 'stores';
-import { IAuthData } from 'stores/AuthStore/types';
+import { EErrorAuthFieldTypes, IAuthData } from 'stores/AuthStore/types';
 import { observer } from 'utils';
 import { submitButtonTextsMap } from './constants';
 import s from './authForm.scss';
@@ -48,6 +47,8 @@ export const AuthForm: IFC<IAuthFormProps> = observer((props) => {
 
   const handleChangeEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
+
+    authStore.clearError();
     event.preventDefault();
     setEmail(value);
   };
@@ -64,6 +65,7 @@ export const AuthForm: IFC<IAuthFormProps> = observer((props) => {
 
   const handleChangePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
+    authStore.clearError();
 
     setPassword(value);
   };
@@ -98,7 +100,7 @@ export const AuthForm: IFC<IAuthFormProps> = observer((props) => {
         value={email}
         size="medium"
         type="email"
-        error={authStore.errors[EErrorFieldTypes.Email]}
+        error={authStore.errors[EErrorAuthFieldTypes.Email]}
         label="Email адрес"
         placeholder="Введите ваш email"
         iconLeft={<MailIcon className={s.fieldIcon} />}
@@ -115,7 +117,7 @@ export const AuthForm: IFC<IAuthFormProps> = observer((props) => {
         placeholder="Введите ваш пароль"
         type={passwordInputType}
         ref={passwordInputRef}
-        error={authStore.errors[EErrorFieldTypes.Password]}
+        error={authStore.errors[EErrorAuthFieldTypes.Password]}
         iconLeft={<KeyIcon className={s.fieldIcon} />}
         onFocus={handleFocus}
         iconRight={
@@ -126,21 +128,12 @@ export const AuthForm: IFC<IAuthFormProps> = observer((props) => {
             size="small"
             onClick={togglePasswordVisible}
           >
-            {passwordVisible ? (
-              <VisibilityOffIcon className={s.eyeIcon} />
-            ) : (
-              <VisibilityIcon className={s.eyeIcon} />
-            )}
+            {passwordVisible ? <VisibilityOffIcon className={s.eyeIcon} /> : <VisibilityIcon className={s.eyeIcon} />}
           </IconButton>
         }
         onChange={handleChangePassword}
       />
-      <Button
-        isLoading={authStore.isLoading}
-        className={s.submitButton}
-        size="large"
-        type="submit"
-      >
+      <Button isLoading={authStore.isLoading} className={s.submitButton} size="large" type="submit">
         {submitButtonText}
       </Button>
       {redirectLinksMap[authProccessType]}

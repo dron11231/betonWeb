@@ -23,7 +23,7 @@ export const AuthPage: IFC<IAuthPageProps> = observer((props) => {
   };
 
   if (userStore.userData?.userId) {
-    return <Navigate to={routerPaths.Home} />;
+    return <Navigate to={routerPaths.App.Root} replace />;
   }
 
   return (

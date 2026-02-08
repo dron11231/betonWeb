@@ -9,11 +9,6 @@ export const userStore: IUserStore = new UserStore();
 
 export const authStore: IAuthStore = new AuthStore(userStore, authApi);
 
-export const homePageStore: IHomePageStore = new HomePageStore(
-  userStore,
-  researchApi
-);
+export const homePageStore: IHomePageStore = new HomePageStore(userStore, researchApi);
 
-export const researchesStore: IResearchesStore = new ResearchesStore(
-  researchApi
-);
+export const researchesStore: IResearchesStore = new ResearchesStore(researchApi);

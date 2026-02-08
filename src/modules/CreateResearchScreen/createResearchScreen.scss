@@ -1,0 +1,85 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  background-color: #fefefe;
+  height: 100%;
+  width: 100%;
+  z-index: 10;
+  position: absolute;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  background-color: #fff;
+  border-bottom: 1px solid var(--border-main);
+}
+
+.title {
+  font-weight: 600;
+}
+
+.placeholder {
+  width: 36px;
+  height: 36px;
+}
+
+.contentWrapper {
+  padding: 16px 12px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  gap: 20px;
+  height: 100%;
+}
+
+.textField label {
+  color: var(--text-basic);
+}
+
+.templatesBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.templatesInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  .infoTitle {
+    font-size: var(font-size-small);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-basic);
+  }
+
+  .infoDescription {
+    font-size: var(--font-size-x-small);
+    color: #64748b;
+  }
+}
+
+.addTemplateButton {
+  width: 100%;
+  color: var(--theme-color) !important;
+  background-color: #fff !important;
+  border-color: #e5e7eb !important;
+
+  svg path {
+    fill: var(--theme-color) !important;
+  }
+}
+
+.createResearchButton {
+  bottom: 0;
+  width: 100%;
+}
