@@ -5,10 +5,11 @@ import BagIcon from 'assets/icons/bag.svg?svgr';
 import HeartIcon from 'assets/icons/heartIcon.svg?svgr';
 import HomeIcon from 'assets/icons/homeIcon.svg?svgr';
 import TrashIcon from 'assets/icons/trash.svg?svgr';
+import { INavigationLink } from 'components/Navigation';
 import { PrivateContainer } from 'containers';
 import { useCreateResearch } from 'hooks';
-import { CreateResearchScreen } from 'modules';
 import { routerPaths } from 'routes/routerPaths';
+import { CreateResearchScreen } from 'screens';
 import s from './mainNavigation.scss';
 
 export const MainNavigation: IFC = observer((props) => {
@@ -16,6 +17,15 @@ export const MainNavigation: IFC = observer((props) => {
   const { params } = useMatch('/app/*') as PathMatch;
   const { isCreateResearchOpen } = useCreateResearch();
   const currentPage = params['*'];
+
+  const links: INavigationLink[] = [
+    {
+      text: '',
+      isActive: currentPage === routerPaths.App.Home,
+      to: routerPaths.App.Home,
+      icon: <HomeIcon />,
+    },
+  ];
 
   return (
     <>

@@ -8,4 +8,8 @@ export const routerPaths = {
     Home: 'home',
     Favorites: 'favorites',
   },
+  Research: {
+    Root: '/research/:id/*',
+    Constructor: 'constructor/*',
+  },
 };

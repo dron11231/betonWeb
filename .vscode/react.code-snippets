@@ -9,4 +9,19 @@
     "body": ["import React from 'react'"],
     "description": "Импорт реакт",
   },
+  "Functional Component with displayName": {
+    "prefix": "rfc",
+    "body": [
+      "export const ${1:ComponentName}: IFC = () => {",
+      "  return (",
+      "    <div>",
+      "      ${0}",
+      "    </div>",
+      "  );",
+      "};",
+      "",
+      "${1:ComponentName}.displayName = '${1:ComponentName}';",
+    ],
+    "description": "Создает функциональный react компонент с displayName",
+  },
 }

@@ -1,3 +1,4 @@
 export * from './AuthPage';
 export * from './HomePage';
-export * from './ResearchesPage';
+export * from './ResearchesListPage';
+export * from './ResearchPage';

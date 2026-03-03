@@ -1,10 +1,11 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { defineConfig } from '@rsbuild/core';
+import { defineConfig, rspack } from '@rsbuild/core';
 import { pluginReact } from '@rsbuild/plugin-react';
 import { pluginSass } from '@rsbuild/plugin-sass';
 import { pluginSvgr } from '@rsbuild/plugin-svgr';
+import { TsCheckerRspackPlugin } from 'ts-checker-rspack-plugin';
 
 const __filename = fileURLToPath(import.meta.url);
 
@@ -56,6 +57,27 @@ export default defineConfig({
   },
 
   tools: {
+    rspack: {
+      plugins: [
+        new rspack.CircularDependencyRspackPlugin({
+          failOnError: true,
+          exclude: /node_modules/,
+        }),
+        new TsCheckerRspackPlugin({
+          typescript: {
+            configFile: './tsconfig.json',
+            mode: 'readonly',
+            build: false,
+            diagnosticOptions: {
+              syntactic: true,
+              semantic: true,
+              global: true,
+              declaration: false,
+            },
+          },
+        }),
+      ],
+    },
     lightningcssLoader: true,
     htmlPlugin: {
       template: './public/index.html',

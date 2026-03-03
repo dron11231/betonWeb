@@ -37,7 +37,7 @@ export class AuthStore extends BaseStore implements IAuthStore {
   }
 
   public clearError = () => {
-    if (this.errors.email !== null || this.errors.PASSWORD !== null) {
+    if (this.errors.EMAIL !== null || this.errors.PASSWORD !== null) {
       this.errors = {
         [EErrorAuthFieldTypes.Email]: null,
         [EErrorAuthFieldTypes.Password]: null,

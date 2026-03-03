@@ -33,7 +33,7 @@ export const CreateResearchScreen: IFC = observer(() => {
 
   const handleChangeResearchName = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
-    if (errors.name) {
+    if (errors.NAME) {
       clearError();
     }
     setResearchName(value);

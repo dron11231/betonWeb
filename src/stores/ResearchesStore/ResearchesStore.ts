@@ -16,9 +16,9 @@ export interface IResearchesStore extends IBaseStore {
 
 export class ResearchesStore extends BaseStore implements IResearchesStore {
   public errors: TResearchErrorsMap;
-  private readonly _researchApi: IResearchApi;
-
   public researchesList: IResearchData[];
+
+  private readonly _researchApi: IResearchApi;
 
   constructor(researchApi: IResearchApi) {
     super();

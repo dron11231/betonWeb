@@ -1,5 +1,5 @@
 export enum EResearchErrorTypes {
-  Name = 'name', // Потом заменить на NAME
+  Name = 'NAME',
 }
 
 export type TResearchErrorsMap = Record<EResearchErrorTypes, string | null>;
