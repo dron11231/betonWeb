@@ -1,11 +1,10 @@
-import classNames from 'classnames';
 import { observer } from 'mobx-react-lite';
-import { Link, PathMatch, useMatch } from 'react-router-dom';
+import { PathMatch, useMatch } from 'react-router-dom';
 import BagIcon from 'assets/icons/bag.svg?svgr';
 import HeartIcon from 'assets/icons/heartIcon.svg?svgr';
 import HomeIcon from 'assets/icons/homeIcon.svg?svgr';
 import TrashIcon from 'assets/icons/trash.svg?svgr';
-import { INavigationLink } from 'components/Navigation';
+import { INavigationLink, Navigation } from 'components';
 import { PrivateContainer } from 'containers';
 import { useCreateResearch } from 'hooks';
 import { routerPaths } from 'routes/routerPaths';
@@ -20,55 +19,36 @@ export const MainNavigation: IFC = observer((props) => {
 
   const links: INavigationLink[] = [
     {
-      text: '',
+      text: 'Главная',
       isActive: currentPage === routerPaths.App.Home,
       to: routerPaths.App.Home,
       icon: <HomeIcon />,
+    },
+    {
+      text: 'Избранное',
+      isActive: currentPage === routerPaths.App.Favorites,
+      to: routerPaths.App.Favorites,
+      icon: <HeartIcon />,
+    },
+    {
+      text: 'Рабочие области',
+      // isActive: pathname === routerPaths.Researches,
+      to: '',
+      icon: <BagIcon />,
+    },
+    {
+      text: 'Корзина',
+      // isActive: pathname === routerPaths.Researches,
+      to: '',
+      icon: <TrashIcon />,
     },
   ];
 
   return (
     <>
       <div className={s.navigationLayout}>
-        <nav className={s.navigation}>
-          <Link
-            className={classNames(s.link, {
-              [s.active]: currentPage === routerPaths.App.Home,
-            })}
-            to={routerPaths.App.Home}
-          >
-            <HomeIcon />
-            Главная
-          </Link>
-          <Link
-            className={classNames(s.link, {
-              [s.active]: currentPage === routerPaths.App.Favorites,
-            })}
-            to={routerPaths.App.Favorites}
-          >
-            <HeartIcon />
-            Избранное
-          </Link>
-          <Link
-            className={classNames(s.link, {
-              // [s.active]: pathname === routerPaths.Researches,
-            })}
-            to={'/'}
-          >
-            <BagIcon />
-            Рабочие области
-          </Link>
-          <Link
-            className={classNames(s.link, {
-              // [s.active]: pathname === routerPaths.Researches,
-            })}
-            to={'/'}
-          >
-            <TrashIcon />
-            Корзина
-          </Link>
-        </nav>
         <PrivateContainer>{children}</PrivateContainer>
+        <Navigation links={links} />
       </div>
       {isCreateResearchOpen && <CreateResearchScreen />}
     </>

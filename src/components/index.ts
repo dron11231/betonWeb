@@ -4,3 +4,4 @@ export * from './Button';
 export * from './Modal';
 export * from './IconButton';
 export * from './SegmentSelect';
+export * from './Navigation';
