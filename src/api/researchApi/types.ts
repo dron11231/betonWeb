@@ -1,6 +1,6 @@
-import { IResearchData } from 'common/types';
+import { EResearchPermissionTypes, EResearchTemplateTypes, IResearchData } from 'common/types';
 
 export type TCreateResearchData = Omit<
   IResearchData,
-  'id' | 'favorite' | 'status' | 'createdAt' | 'updatedAt' | 'deletedAt'
->;
+  'id' | 'favorite' | 'status' | 'workspaceId' | 'templateId' | 'createdAt' | 'updatedAt' | 'deletedAt'
+> & { template: EResearchTemplateTypes; permission: EResearchPermissionTypes };

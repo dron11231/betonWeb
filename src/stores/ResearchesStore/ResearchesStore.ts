@@ -10,13 +10,14 @@ import { EResearchErrorTypes, TResearchErrorsMap } from './types';
 export interface IResearchesStore extends IBaseStore {
   readonly errors: Readonly<TResearchErrorsMap>;
   researchesList: IResearchData[];
-  createNewResearch: (newResearchData: TCreateResearchData) => Promise<void>;
+  createNewResearch: (newResearchData: TCreateResearchData) => Promise<number>;
   clearError: () => void;
 }
 
 export class ResearchesStore extends BaseStore implements IResearchesStore {
   public errors: TResearchErrorsMap;
   public researchesList: IResearchData[];
+  public currentResearch: IResearchData;
 
   private readonly _researchApi: IResearchApi;
 
@@ -45,13 +46,17 @@ export class ResearchesStore extends BaseStore implements IResearchesStore {
   public createNewResearch = async (newResearchData: TCreateResearchData) => {
     const request = () => this._researchApi.createResearch(newResearchData);
 
-    const success = (responseData: IResearchData) => (this.researchesList = [...this.researchesList, responseData]);
+    const success = (responseData: IResearchData) => {
+      this.currentResearch = responseData;
+    };
 
     const error = (error: AxiosError<IResponse<null, EResearchErrorTypes>>) =>
       error.response?.data.errors!.forEach((error) => {
         this.errors[error.field] = error.text;
       });
 
-    this.executeRequest(request, success, error);
+    await this.executeRequest(request, success, error);
+
+    return this.currentResearch.id;
   };
 }

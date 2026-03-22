@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { observer } from 'mobx-react-lite';
+import { generatePath, useNavigate } from 'react-router-dom';
 import ArrowLeftIcon from 'assets/icons/arrowLeft.svg?svgr';
 import PlusIcon from 'assets/icons/plus.svg?svgr';
 import { EResearchAccessTypes, EResearchPermissionTypes, EResearchTemplateTypes, EResearchTypes } from 'common/types';
 import { Button, IconButton, ISegmentButtonData, SegmentSelect, TextField } from 'components';
 import { useCreateResearch } from 'hooks';
+import { routerPaths } from 'routes/routerPaths';
 import { researchesStore, userStore } from 'stores';
 import { EResearchErrorTypes } from 'stores/ResearchesStore/types';
 import s from './createResearchScreen.scss';
@@ -22,8 +24,12 @@ const researchTypeButtons: ISegmentButtonData[] = [
 
 export const CreateResearchScreen: IFC = observer(() => {
   const { closeCreateResearch } = useCreateResearch();
+
   const [researchType, setResearchType] = useState(EResearchTypes.UnModerated);
   const [researchName, setResearchName] = useState('');
+
+  const navigate = useNavigate();
+
   const { userData } = userStore;
   const { createNewResearch, clearError, errors } = researchesStore;
 
@@ -39,9 +45,9 @@ export const CreateResearchScreen: IFC = observer(() => {
     setResearchName(value);
   };
 
-  const handleCreateResearch = () => {
+  const handleCreateResearch = async () => {
     if (userData?.userId) {
-      createNewResearch({
+      const researchId = await createNewResearch({
         name: researchName,
         type: researchType,
         userId: userData?.userId,
@@ -49,6 +55,9 @@ export const CreateResearchScreen: IFC = observer(() => {
         access: EResearchAccessTypes.Private,
         permission: EResearchPermissionTypes.Write,
       });
+      if (researchId) {
+        navigate(generatePath(routerPaths.Research.Root, { id: researchId }));
+      }
     }
   };
 

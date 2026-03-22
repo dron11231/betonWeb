@@ -18,15 +18,15 @@ export abstract class BaseStore implements IBaseStore {
 
   protected executeRequest = async <DataType, ErrorType>(
     request: () => Promise<TBaseResponse<DataType, ErrorType>>,
-    onSuccess?: (data: DataType) => void,
+    onSuccess?: (data: DataType) => DataType | void,
     onError?: (error: AxiosError) => void
-  ) => {
+  ): Promise<void> => {
     try {
       this.isLoading = true;
-      const reponseData = await request();
+      const responseData = await request();
       runInAction(() => {
-        if (reponseData.data.payload) {
-          onSuccess?.(reponseData.data.payload);
+        if (responseData.data.payload) {
+          onSuccess?.(responseData.data.payload);
         }
       });
     } catch (error) {

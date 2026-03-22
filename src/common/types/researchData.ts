@@ -18,14 +18,14 @@ export enum EResearchPermissionTypes {
 export interface IResearchData {
   id: number;
   userId: number;
+  workspaceId: number;
   type: EResearchTypes;
-  template: EResearchTemplateTypes;
+  templateId: number;
   access: EResearchAccessTypes;
-  permission: EResearchPermissionTypes;
   name: string;
   favorite: boolean;
   status: boolean;
-  createdAt: Date;
-  updatedAt: Date | null;
-  deletedAt: Date | null;
+  createdAt: string;
+  updatedAt: string;
+  deletedAt: string;
 }
