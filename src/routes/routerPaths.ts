@@ -10,6 +10,9 @@ export const routerPaths = {
   },
   Research: {
     Root: '/research/:id/*',
-    Constructor: 'constructor/*',
+    Constructor: {
+      relative: 'constructor',
+      absolute: '/research/:id/constructor',
+    },
   },
 };

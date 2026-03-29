@@ -3,7 +3,7 @@ import { routerPaths } from './routerPaths';
 
 export const ResearchRouter: IFC = () => (
   <Routes>
-    <Route path={routerPaths.Research.Constructor} element={<div>123</div>} />
+    <Route path={routerPaths.Research.Constructor.relative} element={<div>123</div>} />
   </Routes>
 );
 

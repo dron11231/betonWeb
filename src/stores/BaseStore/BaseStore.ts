@@ -20,7 +20,7 @@ export abstract class BaseStore implements IBaseStore {
     request: () => Promise<TBaseResponse<DataType, ErrorType>>,
     onSuccess?: (data: DataType) => DataType | void,
     onError?: (error: AxiosError) => void
-  ): Promise<void> => {
+  ): Promise<DataType | null> => {
     try {
       this.isLoading = true;
       const responseData = await request();
@@ -29,6 +29,7 @@ export abstract class BaseStore implements IBaseStore {
           onSuccess?.(responseData.data.payload);
         }
       });
+      return responseData.data.payload;
     } catch (error) {
       console.log(error);
 
@@ -38,5 +39,6 @@ export abstract class BaseStore implements IBaseStore {
     } finally {
       this.isLoading = false;
     }
+    return null;
   };
 }

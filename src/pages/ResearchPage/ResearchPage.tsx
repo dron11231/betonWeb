@@ -1,41 +1,34 @@
+import { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
-import { INavigationLink, Navigation } from 'components';
+import { generatePath, useNavigate, useParams } from 'react-router-dom';
+import { Navigation } from 'components';
+import { routerPaths } from 'routes/routerPaths';
+import { researchesStore } from 'stores';
+import { generateLinks } from './helpers';
 import s from './researchPage.scss';
 
 export const ResearchPage: IFC = observer((props) => {
   const { children } = props;
 
-  const links: INavigationLink[] = [
-    {
-      text: 'Конструктор',
-      // isActive: currentPage === routerPaths.App.Home,
-      to: '',
-      // icon: <HomeIcon />,
-    },
-    {
-      text: 'Логики',
-      // isActive: currentPage === routerPaths.App.Favorites,
-      to: '',
-      // icon: <HeartIcon />,
-    },
-    {
-      text: 'Каналы',
-      // isActive: pathname === routerPaths.Researches,
-      to: '',
-      // icon: <BagIcon />,
-    },
-    {
-      text: 'Статистика',
-      // isActive: pathname === routerPaths.Researches,
-      to: '',
-      // icon: <TrashIcon />,
-    },
-  ];
+  const { getCurrentResearch } = researchesStore;
+
+  const { id: researchId } = useParams();
+  const navigate = useNavigate();
+
+  const navigationLinks = generateLinks(researchId!);
+
+  useEffect(() => {
+    if (researchId) {
+      getCurrentResearch(Number(researchId)).then(() => {
+        navigate(generatePath(routerPaths.Research.Constructor.absolute, { id: researchId }));
+      });
+    }
+  }, [researchId]);
 
   return (
     <div className={s.container}>
       {children}
-      <Navigation links={links} />
+      <Navigation links={navigationLinks} />
     </div>
   );
 });

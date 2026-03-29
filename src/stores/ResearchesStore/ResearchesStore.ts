@@ -10,7 +10,9 @@ import { EResearchErrorTypes, TResearchErrorsMap } from './types';
 export interface IResearchesStore extends IBaseStore {
   readonly errors: Readonly<TResearchErrorsMap>;
   researchesList: IResearchData[];
-  createNewResearch: (newResearchData: TCreateResearchData) => Promise<number>;
+  currentResearch: IResearchData;
+  createNewResearch: (newResearchData: TCreateResearchData) => Promise<number | undefined>;
+  getCurrentResearch: (researchId: number) => Promise<void>;
   clearError: () => void;
 }
 
@@ -31,7 +33,9 @@ export class ResearchesStore extends BaseStore implements IResearchesStore {
 
     makeObservable<IResearchesStore>(this, {
       researchesList: observable,
+      currentResearch: observable,
       errors: observable,
+      getCurrentResearch: action,
       createNewResearch: action,
       clearError: action,
     });
@@ -46,17 +50,25 @@ export class ResearchesStore extends BaseStore implements IResearchesStore {
   public createNewResearch = async (newResearchData: TCreateResearchData) => {
     const request = () => this._researchApi.createResearch(newResearchData);
 
-    const success = (responseData: IResearchData) => {
-      this.currentResearch = responseData;
-    };
-
     const error = (error: AxiosError<IResponse<null, EResearchErrorTypes>>) =>
       error.response?.data.errors!.forEach((error) => {
         this.errors[error.field] = error.text;
       });
 
-    await this.executeRequest(request, success, error);
+    const responseData = await this.executeRequest(request, () => {}, error);
 
-    return this.currentResearch.id;
+    if (responseData) {
+      return responseData.id;
+    }
+
+    return undefined;
+  };
+
+  public getCurrentResearch = async (researchId: number) => {
+    const request = () => this._researchApi.getCurrentResearch(researchId);
+
+    const success = (responseData: IResearchData) => (this.currentResearch = responseData);
+
+    await this.executeRequest(request, success);
   };
 }
